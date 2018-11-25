@@ -13,7 +13,7 @@ import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 class TopViewPagerAdapter(val context: Context,
                           fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    private val tabCount = 5
+    private val tabCount = 4
 
     override fun getItem(position: Int): Fragment {
         return ListFragment.newInstance(ViewType.fromValue(position))
