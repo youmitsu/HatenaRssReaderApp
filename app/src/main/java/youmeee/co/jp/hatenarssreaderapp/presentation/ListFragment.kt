@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.AndroidSupportInjection
 import youmeee.co.jp.hatenarssreaderapp.R
+import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
+import youmeee.co.jp.hatenarssreaderapp.presentation.view.ListView
 import youmeee.co.jp.hatenarssreaderapp.presenter.TopPresenter
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 import javax.inject.Inject
@@ -17,7 +20,7 @@ import javax.inject.Inject
 /**
  * Created by yumitsuhori on 2018/11/23.
  */
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), ListView {
 
     @Inject
     lateinit var presenter: TopPresenter
@@ -51,7 +54,17 @@ class ListFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+        if (viewType == ViewType.ALL) {
+            presenter.loadRss()
+        }
+
         return view
+    }
+
+    override fun showData(itemList: HatebuFeed) {
+        itemList.items?.forEach {
+            Log.i("items", it.title)
+        }
     }
 
 }

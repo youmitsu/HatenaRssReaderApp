@@ -1,9 +1,8 @@
 package youmeee.co.jp.hatenarssreaderapp.repository
 
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.withContext
+import android.support.annotation.WorkerThread
 import youmeee.co.jp.hatenarssreaderapp.net.RssApi
-import youmeee.co.jp.hatenarssreaderapp.net.RssListEntity
+import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
 import javax.inject.Inject
 
 /**
@@ -13,8 +12,8 @@ class RssRepository @Inject constructor(
         private val rssApi: RssApi
 ) {
 
-    suspend fun getRss(): List<RssListEntity> = withContext(Dispatchers.Default) {
-        rssApi.getEntry().await()
-    }
+    @WorkerThread
+    suspend fun getRss(): HatebuFeed =
+            rssApi.getEntry().await()
 
 }
