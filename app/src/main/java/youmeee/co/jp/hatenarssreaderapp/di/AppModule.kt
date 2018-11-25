@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import youmeee.co.jp.hatenarssreaderapp.net.RssApi
+import youmeee.co.jp.hatenarssreaderapp.presenter.TopPresenter
 import youmeee.co.jp.hatenarssreaderapp.repository.RssRepository
 import javax.inject.Singleton
 
@@ -35,14 +36,8 @@ class AppModule {
     @Singleton
     fun provideRssRepository(rssApi: RssApi): RssRepository = RssRepository(rssApi)
 
-//    @Provides
-//    @Singleton
-//    fun provideViewModelFactory(
-//            providers: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
-//    ) = object : ViewModelProvider.Factory {
-//        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-//            return requireNotNull(providers[modelClass as Class<out ViewModel>]).get() as T
-//        }
-//    }
-
+    @Provides
+    @Singleton
+    fun provideTopPresenter(respository: RssRepository) =
+            TopPresenter(respository)
 }

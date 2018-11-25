@@ -2,17 +2,20 @@ package youmeee.co.jp.hatenarssreaderapp.presentation
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import youmeee.co.jp.hatenarssreaderapp.R
-import youmeee.co.jp.hatenarssreaderapp.viewModel.TopViewModel
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
-    lateinit var viewModelFactory: TopViewModel.Factory
-
-    lateinit var model: TopViewModel
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager
@@ -23,8 +26,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //model = ViewModelProviders.of(this, viewModelFactory)[TopViewModel::class.java]
-
         tabLayout = findViewById(R.id.tab_layout)
         viewPager = findViewById(R.id.view_pager)
         viewPgaerAdapter = TopViewPagerAdapter(this, supportFragmentManager)
@@ -32,4 +33,5 @@ class MainActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)
     }
 
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
 }

@@ -19,11 +19,9 @@ open class App : Application(), HasActivityInjector {
     override fun onCreate() {
         super.onCreate()
         val component = DaggerAppComponent.builder()
-                .application(this)
-                .build()
+                .create(this)
         component.inject(this)
     }
 
     override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
-
 }
