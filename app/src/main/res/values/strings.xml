@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">HatenaRssReaderApp</string>
 
+    <string name="base_url">http://b.hatena.ne.jp/</string>
+
     <!--category-->
     <string name="category_all">総合</string>
     <string name="category_social">世の中</string>
