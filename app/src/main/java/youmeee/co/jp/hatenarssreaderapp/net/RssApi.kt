@@ -11,12 +11,12 @@ interface RssApi {
     @GET("hotentry.rss")
     fun getEntry(): Deferred<HatebuFeed>
 
-    @GET("hotentry/social")
-    fun getSocialEntry()
+    @GET("hotentry/social.rss")
+    fun getSocialEntry(): Deferred<HatebuFeed>
 
-    @GET("hotentry/economics")
-    fun getEconomicsEntry()
+    @GET("hotentry/economics.rss")
+    fun getEconomicsEntry(): Deferred<HatebuFeed>
 
-    @GET("hotentry/life")
-    fun getLifeEntry()
+    @GET("hotentry/life.rss")
+    fun getLifeEntry(): Deferred<HatebuFeed>
 }

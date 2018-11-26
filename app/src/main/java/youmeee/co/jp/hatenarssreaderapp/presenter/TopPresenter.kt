@@ -25,6 +25,7 @@ class TopPresenter @Inject constructor(
         scope.launch(Dispatchers.IO) {
             val itemList = repository.getRss()
             view.showData(itemList)
+            return@launch
         }
     }
 
