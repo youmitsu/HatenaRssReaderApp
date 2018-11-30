@@ -53,10 +53,7 @@ class ListFragment : Fragment(), ListView {
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
-
-        if (viewType == ViewType.ALL) {
-            presenter.loadRss()
-        }
+        presenter.loadRss(viewType)
 
         return view
     }

@@ -4,6 +4,7 @@ import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.Main
 import youmeee.co.jp.hatenarssreaderapp.presentation.view.ListView
 import youmeee.co.jp.hatenarssreaderapp.repository.RssRepository
+import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -21,9 +22,9 @@ class TopPresenter @Inject constructor(
         get() = job + Dispatchers.Main
     private val scope = CoroutineScope(coroutineContext)
 
-    fun loadRss() {
+    fun loadRss(viewType: ViewType) {
         scope.launch(Dispatchers.IO) {
-            val itemList = repository.getRss()
+            val itemList = repository.getRss(viewType)
             view.showData(itemList)
             return@launch
         }
