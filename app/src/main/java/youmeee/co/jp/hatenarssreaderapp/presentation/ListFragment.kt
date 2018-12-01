@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import dagger.android.support.AndroidSupportInjection
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
@@ -27,6 +27,7 @@ class ListFragment : Fragment(), ListView {
 
     lateinit var viewType: ViewType
     lateinit var recyclerView: RecyclerView
+    lateinit var adapter: TopRecyclerViewAdapter
 
     companion object {
         val VIEW_TYPE_KEY = "view_type"
@@ -48,20 +49,22 @@ class ListFragment : Fragment(), ListView {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter.setView(this)
         viewType = ViewType.fromValue(arguments.getInt(VIEW_TYPE_KEY))
-        val layoutInflater = LayoutInflater.from(context)
-        val view = layoutInflater.inflate(R.layout.fragment_list, null)
+        val view = LayoutInflater.from(context).inflate(R.layout.fragment_list, null)
 
         recyclerView = view.findViewById(R.id.recycler_view)
+        recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
+        adapter = TopRecyclerViewAdapter(context,
+                { v: View, i: Int -> Toast.makeText(context, "position is ${i}", Toast.LENGTH_LONG) },
+                mutableListOf())
+        recyclerView.adapter = adapter
         presenter.loadRss(viewType)
 
         return view
     }
 
     override fun showData(itemList: HatebuFeed) {
-        itemList.items?.forEach {
-            Log.i("items", it.title)
-        }
+        adapter.setItemList(itemList.items ?: mutableListOf())
     }
 
 }
