@@ -15,7 +15,7 @@ import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 class TopRecyclerViewAdapter(
         private val context: Context,
         private val itemClickListener: (view: View, index: Int) -> Unit,
-        private var itemList: MutableList<HatebuEntry>) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
+        private var itemList: List<HatebuEntry>) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
 
     private var mRecyclerView: RecyclerView? = null
 
@@ -50,12 +50,12 @@ class TopRecyclerViewAdapter(
         }
     }
 
-    fun setItemList(items: List<HatebuEntry>) {
-        items.forEach {
-            this.itemList.add(it)
-        }
-        notifyDataSetChanged()
-    }
+//    fun setItemList(items: List<HatebuEntry>) {
+//        items.forEach {
+//            this.itemList.add(it)
+//        }
+//        notifyDataSetChanged()
+//    }
 
 
     class TopRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
