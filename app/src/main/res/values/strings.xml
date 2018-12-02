@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HatenaRssReaderApp</string>
+    <string name="app_name">はてなRSSりーだー</string>
 
     <string name="base_url">http://b.hatena.ne.jp/</string>
 

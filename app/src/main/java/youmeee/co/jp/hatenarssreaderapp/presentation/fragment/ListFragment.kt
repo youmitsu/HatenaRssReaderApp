@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -25,6 +26,7 @@ import youmeee.co.jp.hatenarssreaderapp.presenter.TopPresenter
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
+
 
 /**
  * Created by yumitsuhori on 2018/11/23.
@@ -70,6 +72,9 @@ class ListFragment : Fragment(), ListView {
         val view = LayoutInflater.from(context).inflate(R.layout.fragment_list, null)
 
         recyclerView = view.findViewById(R.id.recycler_view)
+        val dividerItemDecoration = DividerItemDecoration(recyclerView.context,
+                LinearLayoutManager(activity).orientation)
+        recyclerView.addItemDecoration(dividerItemDecoration)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -85,6 +90,10 @@ class ListFragment : Fragment(), ListView {
         }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun setData(hatebuFeed: HatebuFeed) {
