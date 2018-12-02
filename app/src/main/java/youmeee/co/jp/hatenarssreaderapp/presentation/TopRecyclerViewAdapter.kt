@@ -29,7 +29,6 @@ class TopRecyclerViewAdapter(
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
         mRecyclerView = null
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRecyclerViewHolder {

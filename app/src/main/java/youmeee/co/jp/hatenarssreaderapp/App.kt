@@ -2,6 +2,7 @@ package youmeee.co.jp.hatenarssreaderapp
 
 import android.app.Activity
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -21,6 +22,7 @@ open class App : Application(), HasActivityInjector {
         val component = DaggerAppComponent.builder()
                 .create(this)
         component.inject(this)
+        AndroidThreeTen.init(this);
     }
 
     override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
