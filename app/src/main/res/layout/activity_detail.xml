@@ -54,13 +54,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/list_item_side_padding"
+            android:layout_marginRight="@dimen/list_item_side_padding"
             android:layout_marginStart="@dimen/list_item_side_padding"
             android:layout_marginTop="@dimen/list_item_vertical_margin"
             android:text="@{entry.description}"
-            android:textSize="15sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/bookmark_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/list_item_side_padding"
+            android:layout_marginRight="@dimen/list_item_side_padding"
+            android:layout_marginTop="@dimen/detail_description_top_margin"
+            android:text='@{entry.bookmarkcount+"いいね！"}'
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description" />
 
         <TextView
             android:id="@+id/date"
@@ -71,7 +84,7 @@
             android:layout_marginTop="@dimen/detail_description_top_margin"
             app:dateForString="@{entry.date}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description" />
+            app:layout_constraintTop_toBottomOf="@id/bookmark_count" />
 
         <Button
             android:layout_width="0dp"

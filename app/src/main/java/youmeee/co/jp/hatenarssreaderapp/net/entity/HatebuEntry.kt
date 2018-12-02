@@ -26,5 +26,9 @@ class HatebuEntry(
         @set:Element(required = false)
         @get:Element(required = false)
         @Namespace(prefix = "hatena")
-        var imageurl: String? = ""
+        var imageurl: String? = "",
+        @set:Element(required = false)
+        @get:Element(required = false)
+        @Namespace(prefix = "hatena")
+        var bookmarkcount: String? = ""
 ) : Serializable
