@@ -48,7 +48,6 @@ class TopRecyclerViewAdapter(
     override fun onBindViewHolder(holder: TopRecyclerViewHolder, position: Int) {
         val entry = itemList[position]
         holder.apply {
-            textView.text = entry.description
             titleView.text = entry.title
             Glide.with(context).load(entry.imageurl).into(thumbnailView)
         }
@@ -64,7 +63,6 @@ class TopRecyclerViewAdapter(
 
     class TopRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleView: TextView = view.findViewById(R.id.title)
-        val textView: TextView = view.findViewById(R.id.text)
         val thumbnailView: ImageView = view.findViewById(R.id.thumbnail)
     }
 

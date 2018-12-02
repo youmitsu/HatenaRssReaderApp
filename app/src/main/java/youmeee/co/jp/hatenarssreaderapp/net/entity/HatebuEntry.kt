@@ -22,7 +22,7 @@ class HatebuEntry(
         @set:Element(required = false)
         @get:Element(required = false)
         @Namespace(prefix = "dc")
-        var date: String? = null,
+        var date: String = "",
         @set:Element(required = false)
         @get:Element(required = false)
         @Namespace(prefix = "hatena")

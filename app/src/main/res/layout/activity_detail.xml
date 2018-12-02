@@ -29,12 +29,23 @@
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_item_side_padding"
+            android:layout_marginRight="@dimen/list_item_side_padding"
             android:layout_marginTop="@dimen/detail_thumbnail_margin_top"
             android:text="@{entry.title}"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/thumbnail" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/list_item_side_padding"
+            android:layout_marginRight="@dimen/list_item_side_padding"
+            android:background="@color/cardview_dark_background"
+            app:layout_constraintTop_toBottomOf="@id/title" />
 
         <TextView
             android:id="@+id/description"
@@ -42,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/list_item_side_padding"
             android:layout_marginStart="@dimen/list_item_side_padding"
+            android:layout_marginTop="@dimen/list_item_vertical_margin"
             android:text="@{entry.description}"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,14 +61,18 @@
             app:layout_constraintTop_toBottomOf="@id/title" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/list_item_side_padding"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
+            android:layout_marginLeft="@dimen/list_item_side_padding"
+            android:layout_marginRight="@dimen/list_item_side_padding"
             android:onClick="@{activity.onClick}"
             android:text="@string/deital_see"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
