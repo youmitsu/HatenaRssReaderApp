@@ -8,4 +8,7 @@
     <string name="category_social">世の中</string>
     <string name="category_economics">政治と経済</string>
     <string name="category_life">暮らし</string>
+
+    <!--detail-->
+    <string name="deital_see">続きを読む</string>
 </resources>

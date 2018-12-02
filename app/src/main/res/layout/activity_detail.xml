@@ -7,6 +7,10 @@
         <variable
             name="entry"
             type="youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry" />
+
+        <variable
+            name="activity"
+            type="youmeee.co.jp.hatenarssreaderapp.presentation.activity.DetailActivity" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -43,6 +47,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/list_item_side_padding"
+            android:onClick="@{activity.onClick}"
+            android:text="@string/deital_see"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
