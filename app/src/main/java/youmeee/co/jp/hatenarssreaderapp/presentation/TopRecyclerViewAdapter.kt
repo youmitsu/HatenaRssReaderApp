@@ -14,7 +14,7 @@ import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
  */
 class TopRecyclerViewAdapter(
         private val context: Context,
-        private val itemClickListener: (view: View, index: Int) -> Unit,
+        private val itemClickListener: (view: View, hatebuEntry: HatebuEntry) -> Unit,
         private var itemList: List<HatebuEntry>) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
 
     private var mRecyclerView: RecyclerView? = null
@@ -35,7 +35,7 @@ class TopRecyclerViewAdapter(
         val view = layouteInflater.inflate(R.layout.fragment_list_item, parent, false)
         view.setOnClickListener {
             mRecyclerView?.let {
-                itemClickListener.invoke(view, it.getChildAdapterPosition(view))
+                itemClickListener.invoke(view, itemList[it.getChildAdapterPosition(view)])
             }
         }
         return TopRecyclerViewHolder(view)

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import youmeee.co.jp.hatenarssreaderapp.R
+import youmeee.co.jp.hatenarssreaderapp.presentation.fragment.ListFragment
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 
 /**

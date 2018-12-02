@@ -2,7 +2,7 @@ package youmeee.co.jp.hatenarssreaderapp.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import youmeee.co.jp.hatenarssreaderapp.presentation.ListFragment
+import youmeee.co.jp.hatenarssreaderapp.presentation.fragment.ListFragment
 
 /**
  * Created by yumitsuhori on 2018/11/25.

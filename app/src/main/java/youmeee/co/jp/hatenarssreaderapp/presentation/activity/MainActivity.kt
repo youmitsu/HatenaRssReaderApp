@@ -1,4 +1,4 @@
-package youmeee.co.jp.hatenarssreaderapp.presentation
+package youmeee.co.jp.hatenarssreaderapp.presentation.activity
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -10,6 +10,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import youmeee.co.jp.hatenarssreaderapp.R
+import youmeee.co.jp.hatenarssreaderapp.presentation.TopViewPagerAdapter
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {

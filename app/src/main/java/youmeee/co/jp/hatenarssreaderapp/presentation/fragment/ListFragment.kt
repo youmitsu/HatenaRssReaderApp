@@ -1,6 +1,7 @@
-package youmeee.co.jp.hatenarssreaderapp.presentation
+package youmeee.co.jp.hatenarssreaderapp.presentation.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -8,7 +9,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.Dispatchers
@@ -18,6 +18,8 @@ import kotlinx.coroutines.experimental.launch
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
+import youmeee.co.jp.hatenarssreaderapp.presentation.TopRecyclerViewAdapter
+import youmeee.co.jp.hatenarssreaderapp.presentation.activity.DetailActivity
 import youmeee.co.jp.hatenarssreaderapp.presentation.view.ListView
 import youmeee.co.jp.hatenarssreaderapp.presenter.TopPresenter
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
@@ -72,7 +74,11 @@ class ListFragment : Fragment(), ListView {
         scope.launch {
             data = presenter.loadRss(viewType).items ?: mutableListOf()
             adapter = TopRecyclerViewAdapter(context,
-                    { v: View, i: Int -> Toast.makeText(context, "position is ${i}", Toast.LENGTH_LONG) }, data)
+                    { v: View, entry: HatebuEntry ->
+                        val intent = Intent(context, DetailActivity::class.java)
+                        intent.putExtra(DetailActivity.ENTRY_KEY, entry)
+                        startActivity(intent)
+                    }, data)
             recyclerView.adapter = adapter
         }
 
