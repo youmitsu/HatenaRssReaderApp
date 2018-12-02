@@ -65,6 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/list_item_side_padding"
             android:layout_marginRight="@dimen/list_item_side_padding"
+            android:layout_marginTop="@dimen/detail_description_top_margin"
             app:dateForString="@{entry.date}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description" />
