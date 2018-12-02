@@ -62,9 +62,11 @@ class ListFragment : Fragment(), ListView {
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter.setView(this)
-        viewType = ViewType.fromValue(arguments.getInt(VIEW_TYPE_KEY))
+        arguments?.let {
+            viewType = ViewType.fromValue(it.getInt(VIEW_TYPE_KEY))
+        }
         val view = LayoutInflater.from(context).inflate(R.layout.fragment_list, null)
 
         recyclerView = view.findViewById(R.id.recycler_view)
@@ -73,7 +75,7 @@ class ListFragment : Fragment(), ListView {
 
         scope.launch {
             data = presenter.loadRss(viewType).items ?: mutableListOf()
-            adapter = TopRecyclerViewAdapter(context,
+            adapter = TopRecyclerViewAdapter(context!!,
                     { v: View, entry: HatebuEntry ->
                         val intent = Intent(context, DetailActivity::class.java)
                         intent.putExtra(DetailActivity.ENTRY_KEY, entry)
