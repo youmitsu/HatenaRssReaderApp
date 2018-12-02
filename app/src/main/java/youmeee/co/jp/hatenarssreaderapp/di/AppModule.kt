@@ -4,9 +4,12 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.Coroutin
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
+import youmeee.co.jp.hatenarssreaderapp.BuildConfig
 import youmeee.co.jp.hatenarssreaderapp.net.RssApi
+import youmeee.co.jp.hatenarssreaderapp.presenter.TopPresenter
 import youmeee.co.jp.hatenarssreaderapp.repository.RssRepository
 import javax.inject.Singleton
 
@@ -18,12 +21,22 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit =
+    fun provideOkHttpClient(): OkHttpClient =
+            OkHttpClient.Builder()
+                    .apply {
+                        if (BuildConfig.DEBUG) {
+                            addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
+                        }
+                    }.build()
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(client: OkHttpClient): Retrofit =
             Retrofit.Builder()
                     .baseUrl("http://b.hatena.ne.jp/")
                     .addConverterFactory(SimpleXmlConverterFactory.create())
                     .addCallAdapterFactory(CoroutineCallAdapterFactory())
-                    .client(OkHttpClient())
+                    .client(client)
                     .build()
 
     @Provides
@@ -35,14 +48,8 @@ class AppModule {
     @Singleton
     fun provideRssRepository(rssApi: RssApi): RssRepository = RssRepository(rssApi)
 
-//    @Provides
-//    @Singleton
-//    fun provideViewModelFactory(
-//            providers: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
-//    ) = object : ViewModelProvider.Factory {
-//        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-//            return requireNotNull(providers[modelClass as Class<out ViewModel>]).get() as T
-//        }
-//    }
-
+    @Provides
+    @Singleton
+    fun provideTopPresenter(respository: RssRepository) =
+            TopPresenter(respository)
 }

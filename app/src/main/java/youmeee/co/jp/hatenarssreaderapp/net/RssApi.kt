@@ -2,20 +2,21 @@ package youmeee.co.jp.hatenarssreaderapp.net
 
 import kotlinx.coroutines.experimental.Deferred
 import retrofit2.http.GET
+import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
 
 /**
  * Created by yumitsuhori on 2018/11/25.
  */
 interface RssApi {
-    @GET("hotentry")
-    fun getEntry(): Deferred<List<RssListEntity>>
+    @GET("hotentry.rss")
+    fun getEntry(): Deferred<HatebuFeed>
 
-    @GET("hotentry/social")
-    fun getSocialEntry()
+    @GET("hotentry/social.rss")
+    fun getSocialEntry(): Deferred<HatebuFeed>
 
-    @GET("hotentry/economics")
-    fun getEconomicsEntry()
+    @GET("hotentry/economics.rss")
+    fun getEconomicsEntry(): Deferred<HatebuFeed>
 
-    @GET("hotentry/life")
-    fun getLifeEntry()
+    @GET("hotentry/life.rss")
+    fun getLifeEntry(): Deferred<HatebuFeed>
 }
