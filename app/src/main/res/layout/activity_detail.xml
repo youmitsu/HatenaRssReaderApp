@@ -17,6 +17,7 @@
             android:id="@+id/thumbnail"
             android:layout_width="0dp"
             android:layout_height="@dimen/detail_thumbnail_image"
+            app:imageUrl="@{entry.imageurl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -38,7 +39,7 @@
             android:layout_marginLeft="@dimen/list_item_side_padding"
             android:layout_marginStart="@dimen/list_item_side_padding"
             android:text="@{entry.description}"
-            android:textSize="20sp"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title" />
