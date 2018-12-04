@@ -14,7 +14,7 @@ import youmeee.co.jp.hatenarssreaderapp.repository.RssRepository
 import javax.inject.Singleton
 
 /**
- * Created by yumitsuhori on 2018/11/25.
+ * AppModule
  */
 @Module
 class AppModule {

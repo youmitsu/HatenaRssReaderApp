@@ -7,7 +7,7 @@ import youmeee.co.jp.hatenarssreaderapp.App
 import javax.inject.Singleton
 
 /**
- * Created by yumitsuhori on 2018/11/25.
+ * AppComponent
  */
 @Component(modules = [
     AndroidSupportInjectionModule::class,

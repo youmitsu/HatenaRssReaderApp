@@ -9,7 +9,7 @@ import youmeee.co.jp.hatenarssreaderapp.presentation.fragment.ListFragment
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 
 /**
- * Created by yumitsuhori on 2018/11/23.
+ * TopViewPagerAdapter
  */
 class TopViewPagerAdapter(val context: Context,
                           fm: FragmentManager) : FragmentPagerAdapter(fm) {

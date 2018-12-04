@@ -5,7 +5,7 @@ import dagger.android.ContributesAndroidInjector
 import youmeee.co.jp.hatenarssreaderapp.presentation.activity.MainActivity
 
 /**
- * Created by yumitsuhori on 2018/11/25.
+ * ActivityModule
  */
 @Module
 abstract class ActivityModule {

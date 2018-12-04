@@ -10,7 +10,7 @@ import youmeee.co.jp.hatenarssreaderapp.di.DaggerAppComponent
 import javax.inject.Inject
 
 /**
- * Created by yumitsuhori on 2018/11/25.
+ * App
  */
 open class App : Application(), HasActivityInjector {
 

@@ -12,4 +12,7 @@
     <!--detail-->
     <string name="deital_see">続きを読む</string>
     <string name="detail_date_format_pattern">yyyy年MM月dd日 HH時mm分</string>
+
+    <!-- error -->
+    <string name="error_description">エラーが発生しました</string>
 </resources>

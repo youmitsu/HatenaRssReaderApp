@@ -2,8 +2,10 @@ package youmeee.co.jp.hatenarssreaderapp.presentation.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.Main
 import kotlinx.coroutines.experimental.launch
 import youmeee.co.jp.hatenarssreaderapp.R
+import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopRecyclerViewAdapter
 import youmeee.co.jp.hatenarssreaderapp.presentation.activity.DetailActivity
@@ -28,15 +31,15 @@ import kotlin.coroutines.experimental.CoroutineContext
 
 
 /**
- * Created by yumitsuhori on 2018/11/23.
+ * ListFragment
  */
-class ListFragment : Fragment(), ListView {
+class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     lateinit var presenter: TopPresenter
-    lateinit var viewType: ViewType
-
-    lateinit var itemList: MutableList<HatebuEntry>
+    private lateinit var binding: FragmentListBinding
+    private lateinit var viewType: ViewType
+    private lateinit var itemList: MutableList<HatebuEntry>
 
     private val job = Job()
     private val coroutineContext: CoroutineContext
@@ -61,16 +64,19 @@ class ListFragment : Fragment(), ListView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
         arguments?.let {
             viewType = ViewType.fromValue(it.getInt(VIEW_TYPE_KEY))
         }
+        binding.isLoading = true
+        binding.isError = false
         presenter.setView(this)
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        swipeRefreshLayout.setOnRefreshListener(this)
         scope.launch {
             itemList = presenter.loadRss(viewType).items ?: mutableListOf()
             recycler_view.adapter = TopRecyclerViewAdapter(context!!,
@@ -81,16 +87,29 @@ class ListFragment : Fragment(), ListView {
                     }, itemList)
             recycler_view.layoutManager = LinearLayoutManager(context)
             recycler_view.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(activity).orientation))
+            binding.isLoading = false
         }
     }
 
     override fun setData(items: MutableList<HatebuEntry>?) {
-//        this.itemList.clear()
+        this.itemList.clear()
         items?.let {
             for (item in it) {
                 this.itemList.add(item)
             }
         }
         recycler_view.adapter.notifyDataSetChanged()
+    }
+
+    override fun showErrorBar() {
+        binding.isError = true
+    }
+
+    override fun onRefresh() {
+        scope.launch {
+            binding.isError = false
+            setData(presenter.loadRss(viewType).items)
+            swipeRefreshLayout.isRefreshing = false
+        }
     }
 }

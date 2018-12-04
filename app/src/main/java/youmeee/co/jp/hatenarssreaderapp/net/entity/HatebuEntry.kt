@@ -6,7 +6,7 @@ import org.simpleframework.xml.Root
 import java.io.Serializable
 
 /**
- * Created by yumitsuhori on 2018/11/25.
+ * HatebuEntry
  */
 @Root(name = "item", strict = false)
 class HatebuEntry(

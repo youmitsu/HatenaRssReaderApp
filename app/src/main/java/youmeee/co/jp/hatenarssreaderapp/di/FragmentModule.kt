@@ -5,7 +5,7 @@ import dagger.android.ContributesAndroidInjector
 import youmeee.co.jp.hatenarssreaderapp.presentation.fragment.ListFragment
 
 /**
- * Created by yumitsuhori on 2018/11/25.
+ * FragmentModule
  */
 @Module
 abstract class FragmentModule {
