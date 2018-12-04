@@ -9,18 +9,22 @@
         <variable
             name="isLoading"
             type="Boolean" />
+
+        <variable
+            name="isError"
+            type="Boolean" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/list_item_side_padding"
-        android:paddingRight="@dimen/list_item_side_padding">
+        android:layout_height="match_parent">
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:paddingLeft="@dimen/list_item_side_padding"
+            android:paddingRight="@dimen/list_item_side_padding"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +49,19 @@
             android:layout_height="wrap_content"
             android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/error_bar"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:background="@color/cardview_dark_background"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/error_description"
+            android:textColor="@color/white"
+            android:visibility="@{isError ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

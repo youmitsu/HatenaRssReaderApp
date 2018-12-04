@@ -69,6 +69,7 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
             viewType = ViewType.fromValue(it.getInt(VIEW_TYPE_KEY))
         }
         binding.isLoading = true
+        binding.isError = false
         presenter.setView(this)
         return binding.root
     }
@@ -100,8 +101,13 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
         recycler_view.adapter.notifyDataSetChanged()
     }
 
+    override fun showErrorBar() {
+        binding.isError = true
+    }
+
     override fun onRefresh() {
         scope.launch {
+            binding.isError = false
             setData(presenter.loadRss(viewType).items)
             swipeRefreshLayout.isRefreshing = false
         }

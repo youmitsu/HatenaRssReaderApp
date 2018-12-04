@@ -7,4 +7,5 @@ import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
  */
 interface ListView {
     fun setData(items: MutableList<HatebuEntry>?)
+    fun showErrorBar()
 }
