@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -30,7 +31,7 @@ import kotlin.coroutines.experimental.CoroutineContext
 /**
  * Created by yumitsuhori on 2018/11/23.
  */
-class ListFragment : Fragment(), ListView {
+class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     lateinit var presenter: TopPresenter
@@ -71,6 +72,7 @@ class ListFragment : Fragment(), ListView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        swipeRefreshLayout.setOnRefreshListener(this)
         scope.launch {
             itemList = presenter.loadRss(viewType).items ?: mutableListOf()
             recycler_view.adapter = TopRecyclerViewAdapter(context!!,
@@ -85,12 +87,19 @@ class ListFragment : Fragment(), ListView {
     }
 
     override fun setData(items: MutableList<HatebuEntry>?) {
-//        this.itemList.clear()
+        this.itemList.clear()
         items?.let {
             for (item in it) {
                 this.itemList.add(item)
             }
         }
         recycler_view.adapter.notifyDataSetChanged()
+    }
+
+    override fun onRefresh() {
+        scope.launch {
+            setData(presenter.loadRss(viewType).items)
+            swipeRefreshLayout.isRefreshing = false
+        }
     }
 }
