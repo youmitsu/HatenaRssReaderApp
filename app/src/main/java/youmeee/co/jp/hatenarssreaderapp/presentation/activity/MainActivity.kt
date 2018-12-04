@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
-    lateinit var tabLayout: TabLayout
-    lateinit var viewPager: ViewPager
-    lateinit var viewPgaerAdapter: TopViewPagerAdapter
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager
+    private lateinit var viewPgaerAdapter: TopViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)

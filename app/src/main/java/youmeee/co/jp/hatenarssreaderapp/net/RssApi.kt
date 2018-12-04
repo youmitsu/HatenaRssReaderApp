@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
 
 /**
- * Created by yumitsuhori on 2018/11/25.
+ * RssApi
  */
 interface RssApi {
     @GET("hotentry.rss")

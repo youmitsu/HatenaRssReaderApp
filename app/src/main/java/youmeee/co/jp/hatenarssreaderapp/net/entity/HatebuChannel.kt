@@ -4,7 +4,7 @@ import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
 /**
- * Created by yumitsuhori on 2018/11/26.
+ * HatebuChannel
  */
 @Root(name = "channel", strict = false)
 class HatebuChannel {

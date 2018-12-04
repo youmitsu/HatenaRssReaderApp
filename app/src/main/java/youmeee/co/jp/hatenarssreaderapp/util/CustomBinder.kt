@@ -9,7 +9,7 @@ import org.threeten.bp.format.DateTimeFormatter
 import youmeee.co.jp.hatenarssreaderapp.R
 
 /**
- * Created by yumitsuhori on 2018/12/02.
+ * CustomBinder
  */
 class CustomBinder {
 

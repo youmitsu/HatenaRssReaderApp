@@ -6,7 +6,7 @@ import org.simpleframework.xml.Root
 
 
 /**
- * Created by yumitsuhori on 2018/11/25.
+ * HatebuFeed
  */
 @Namespace(reference = "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 @Root(name = "RDF", strict = false)

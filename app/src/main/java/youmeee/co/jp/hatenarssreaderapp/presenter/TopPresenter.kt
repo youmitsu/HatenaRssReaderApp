@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 
 /**
- * Created by yumitsuhori on 2018/11/25.
+ * TopPresenter
  */
 class TopPresenter @Inject constructor(
         val repository: RssRepository

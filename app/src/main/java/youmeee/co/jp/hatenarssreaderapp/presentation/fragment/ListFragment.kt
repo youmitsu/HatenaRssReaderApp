@@ -31,21 +31,20 @@ import kotlin.coroutines.experimental.CoroutineContext
 
 
 /**
- * Created by yumitsuhori on 2018/11/23.
+ * ListFragment
  */
 class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     lateinit var presenter: TopPresenter
-    lateinit var viewType: ViewType
-
-    lateinit var itemList: MutableList<HatebuEntry>
+    private lateinit var binding: FragmentListBinding
+    private lateinit var viewType: ViewType
+    private lateinit var itemList: MutableList<HatebuEntry>
 
     private val job = Job()
     private val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
     private val scope = CoroutineScope(coroutineContext)
-    private lateinit var binding: FragmentListBinding
 
     companion object {
         val VIEW_TYPE_KEY = "view_type"

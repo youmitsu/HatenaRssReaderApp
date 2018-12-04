@@ -1,7 +1,7 @@
 package youmeee.co.jp.hatenarssreaderapp.util
 
 /**
- * Created by yumitsuhori on 2018/11/23.
+ * ViewType
  */
 enum class ViewType(val value: Int) {
     ALL(0),

@@ -12,7 +12,7 @@ import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 
 /**
- * Created by yumitsuhori on 2018/11/23.
+ * TopRecyclerViewAdapter
  */
 class TopRecyclerViewAdapter(
         private val context: Context,

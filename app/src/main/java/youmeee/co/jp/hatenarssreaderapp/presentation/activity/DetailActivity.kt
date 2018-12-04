@@ -11,11 +11,11 @@ import youmeee.co.jp.hatenarssreaderapp.databinding.ActivityDetailBinding
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 
 /**
- * Created by yumitsuhori on 2018/12/02.
+ * DetailActivity
  */
 class DetailActivity : AppCompatActivity() {
 
-    lateinit var entry: HatebuEntry
+    private lateinit var entry: HatebuEntry
 
     companion object {
         val ENTRY_KEY = "entry_key"

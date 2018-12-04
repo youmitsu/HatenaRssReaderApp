@@ -7,7 +7,7 @@ import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 import javax.inject.Inject
 
 /**
- * Created by yumitsuhori on 2018/11/25.
+ * RssRepository
  */
 class RssRepository @Inject constructor(
         private val rssApi: RssApi
