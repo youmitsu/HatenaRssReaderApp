@@ -2,7 +2,6 @@ package youmeee.co.jp.hatenarssreaderapp.presentation.fragment
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
@@ -11,15 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.Main
 import kotlinx.coroutines.experimental.launch
 import youmeee.co.jp.hatenarssreaderapp.R
-import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
-import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopRecyclerViewAdapter
 import youmeee.co.jp.hatenarssreaderapp.presentation.activity.DetailActivity
 import youmeee.co.jp.hatenarssreaderapp.presentation.view.ListView
@@ -36,18 +34,14 @@ class ListFragment : Fragment(), ListView {
 
     @Inject
     lateinit var presenter: TopPresenter
-
     lateinit var viewType: ViewType
-    lateinit var adapter: TopRecyclerViewAdapter
 
-    lateinit var binding: FragmentListBinding
+    lateinit var itemList: MutableList<HatebuEntry>
 
     private val job = Job()
     private val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
     private val scope = CoroutineScope(coroutineContext)
-
-    lateinit var data: MutableList<HatebuEntry>
 
     companion object {
         val VIEW_TYPE_KEY = "view_type"
@@ -67,28 +61,36 @@ class ListFragment : Fragment(), ListView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        presenter.setView(this)
+        val view = inflater.inflate(R.layout.fragment_list, container, false)
         arguments?.let {
             viewType = ViewType.fromValue(it.getInt(VIEW_TYPE_KEY))
         }
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
+        presenter.setView(this)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         scope.launch {
-            binding.hasFixedSize = true
-            binding.itemDecoration = DividerItemDecoration(context, LinearLayoutManager(activity).orientation)
-            binding.layoutManager = LinearLayoutManager(context)
-            data = presenter.loadRss(viewType).items ?: mutableListOf()
-            binding.adapter = TopRecyclerViewAdapter(context!!,
+            itemList = presenter.loadRss(viewType).items ?: mutableListOf()
+            recycler_view.adapter = TopRecyclerViewAdapter(context!!,
                     { v: View, entry: HatebuEntry ->
                         val intent = Intent(context, DetailActivity::class.java)
                         intent.putExtra(DetailActivity.ENTRY_KEY, entry)
                         startActivity(intent)
-                    }, data)
+                    }, itemList)
+            recycler_view.layoutManager = LinearLayoutManager(context)
+            recycler_view.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(activity).orientation))
         }
-        return binding.root
     }
 
-    override fun setData(hatebuFeed: HatebuFeed) {
-//        data = hatebuFeed.items ?: mutableListOf()
+    override fun setData(items: MutableList<HatebuEntry>?) {
+//        this.itemList.clear()
+        items?.let {
+            for (item in it) {
+                this.itemList.add(item)
+            }
+        }
+        recycler_view.adapter.notifyDataSetChanged()
     }
-
 }
