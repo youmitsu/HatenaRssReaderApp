@@ -6,6 +6,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
+import youmeee.co.jp.hatenarssreaderapp.R
 
 /**
  * Created by yumitsuhori on 2018/12/02.
@@ -23,9 +24,8 @@ class CustomBinder {
         @BindingAdapter("app:dateForString")
         fun dateForString(textView: TextView, date: String) {
             val date = ZonedDateTime.parse(date)
-            val formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH時mm分")
+            val formatter = DateTimeFormatter.ofPattern(textView.context.getString(R.string.detail_date_format_pattern))
             textView.text = date.format(formatter)
         }
     }
-
 }

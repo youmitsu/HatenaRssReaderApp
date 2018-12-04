@@ -15,11 +15,6 @@ class TopPresenter @Inject constructor(
 ) {
     private lateinit var view: ListView
 
-//    private val job = Job()
-//    private val coroutineContext: CoroutineContext
-//        get() = job + Dispatchers.Main
-//    private val scope = CoroutineScope(coroutineContext)
-
     suspend fun loadRss(viewType: ViewType): HatebuFeed = repository.getRss(viewType)
 
     fun setView(view: ListView) {

@@ -17,7 +17,7 @@ import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 class TopRecyclerViewAdapter(
         private val context: Context,
         private val itemClickListener: (view: View, hatebuEntry: HatebuEntry) -> Unit,
-        private var itemList: List<HatebuEntry>) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
+        private val itemList: List<HatebuEntry>) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
 
     private var mRecyclerView: RecyclerView? = null
 
@@ -51,14 +51,6 @@ class TopRecyclerViewAdapter(
             Glide.with(context).load(entry.imageurl).into(thumbnailView)
         }
     }
-
-//    fun setItemList(items: List<HatebuEntry>) {
-//        items.forEach {
-//            this.itemList.add(it)
-//        }
-//        notifyDataSetChanged()
-//    }
-
 
     class TopRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleView: TextView = view.findViewById(R.id.title)
