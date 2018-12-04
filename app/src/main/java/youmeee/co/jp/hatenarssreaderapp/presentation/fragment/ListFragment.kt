@@ -2,6 +2,7 @@ package youmeee.co.jp.hatenarssreaderapp.presentation.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -18,6 +19,7 @@ import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.Main
 import kotlinx.coroutines.experimental.launch
 import youmeee.co.jp.hatenarssreaderapp.R
+import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopRecyclerViewAdapter
 import youmeee.co.jp.hatenarssreaderapp.presentation.activity.DetailActivity
@@ -43,6 +45,7 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
     private val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
     private val scope = CoroutineScope(coroutineContext)
+    private lateinit var binding: FragmentListBinding
 
     companion object {
         val VIEW_TYPE_KEY = "view_type"
@@ -62,12 +65,13 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
         arguments?.let {
             viewType = ViewType.fromValue(it.getInt(VIEW_TYPE_KEY))
         }
+        binding.isLoading = true
         presenter.setView(this)
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,6 +87,7 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
                     }, itemList)
             recycler_view.layoutManager = LinearLayoutManager(context)
             recycler_view.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(activity).orientation))
+            binding.isLoading = false
         }
     }
 
