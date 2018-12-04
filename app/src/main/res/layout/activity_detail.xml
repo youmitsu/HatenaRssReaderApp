@@ -21,6 +21,7 @@
             android:id="@+id/thumbnail"
             android:layout_width="0dp"
             android:layout_height="@dimen/detail_thumbnail_image"
+            app:imageUrl="@{entry.imageurl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -69,7 +70,7 @@
             android:layout_marginEnd="@dimen/list_item_side_padding"
             android:layout_marginRight="@dimen/list_item_side_padding"
             android:layout_marginTop="@dimen/detail_description_top_margin"
-            android:text='@{entry.bookmarkcount+"いいね！"}'
+            android:text='@{entry.bookmarkcount+"ブックマーク"}'
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description" />

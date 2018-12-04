@@ -1,9 +1,11 @@
 package youmeee.co.jp.hatenarssreaderapp.util
 
+import android.annotation.SuppressLint
 import android.databinding.BindingAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import youmeee.co.jp.hatenarssreaderapp.R
@@ -14,10 +16,17 @@ import youmeee.co.jp.hatenarssreaderapp.R
 class CustomBinder {
 
     companion object {
+        private val requestOptions = RequestOptions()
+
+        @SuppressLint("CheckResult")
         @JvmStatic
         @BindingAdapter("app:imageUrl")
-        fun imageUrl(imageView: ImageView, url: Int) {
-            Glide.with(imageView.context).load(url).into(imageView)
+        fun imageUrl(imageView: ImageView, url: String) {
+            requestOptions.error(R.drawable.no_image)
+            Glide.with(imageView.context)
+                    .load(url)
+                    .apply(requestOptions)
+                    .into(imageView)
         }
 
         @JvmStatic
