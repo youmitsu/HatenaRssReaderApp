@@ -16,7 +16,7 @@ class CustomBinder {
     companion object {
         @JvmStatic
         @BindingAdapter("app:imageUrl")
-        fun imageUrl(imageView: ImageView, url: String) {
+        fun imageUrl(imageView: ImageView, url: Int) {
             Glide.with(imageView.context).load(url).into(imageView)
         }
 

@@ -21,7 +21,6 @@
             android:id="@+id/thumbnail"
             android:layout_width="0dp"
             android:layout_height="@dimen/detail_thumbnail_image"
-            app:imageUrl="@{entry.imageurl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

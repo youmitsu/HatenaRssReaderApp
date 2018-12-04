@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
+
 
 /**
  * TopRecyclerViewAdapter
@@ -20,6 +22,11 @@ class TopRecyclerViewAdapter(
         private val itemList: List<HatebuEntry>) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
 
     private var mRecyclerView: RecyclerView? = null
+    private val requestOptions = RequestOptions()
+
+    init {
+        requestOptions.error(R.drawable.no_image)
+    }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
@@ -48,7 +55,10 @@ class TopRecyclerViewAdapter(
         val entry = itemList[position]
         holder.apply {
             titleView.text = entry.title
-            Glide.with(context).load(entry.imageurl).into(thumbnailView)
+            Glide.with(context)
+                    .load(entry.imageurl)
+                    .apply(requestOptions)
+                    .into(thumbnailView)
         }
     }
 
