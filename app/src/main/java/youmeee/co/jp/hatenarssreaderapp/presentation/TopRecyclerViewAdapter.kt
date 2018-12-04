@@ -16,10 +16,10 @@ import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
  */
 class TopRecyclerViewAdapter(
         private val context: Context,
-        private val itemClickListener: (view: View, hatebuEntry: HatebuEntry) -> Unit,
-        private var itemList: List<HatebuEntry>) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
+        private val itemClickListener: (view: View, hatebuEntry: HatebuEntry) -> Unit) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>(), BindableAdapter<HatebuEntry> {
 
     private var mRecyclerView: RecyclerView? = null
+    private var itemList = emptyList<HatebuEntry>()
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
@@ -52,13 +52,10 @@ class TopRecyclerViewAdapter(
         }
     }
 
-//    fun setItemList(items: List<HatebuEntry>) {
-//        items.forEach {
-//            this.itemList.add(it)
-//        }
-//        notifyDataSetChanged()
-//    }
-
+    override fun setData(items: List<HatebuEntry>) {
+        this.itemList = items
+        notifyDataSetChanged()
+    }
 
     class TopRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleView: TextView = view.findViewById(R.id.title)

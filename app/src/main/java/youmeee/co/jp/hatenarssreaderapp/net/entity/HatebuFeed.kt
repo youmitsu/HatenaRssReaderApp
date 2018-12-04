@@ -13,5 +13,5 @@ import org.simpleframework.xml.Root
 class HatebuFeed {
     @get:ElementList(name = "item", inline = true)
     @set:ElementList(name = "item", inline = true)
-    var items: List<HatebuEntry>? = null
+    var items: MutableList<HatebuEntry>? = null
 }

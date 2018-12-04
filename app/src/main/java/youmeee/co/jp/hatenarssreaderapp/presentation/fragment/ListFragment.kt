@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +38,6 @@ class ListFragment : Fragment(), ListView {
     lateinit var presenter: TopPresenter
 
     lateinit var viewType: ViewType
-    lateinit var recyclerView: RecyclerView
     lateinit var adapter: TopRecyclerViewAdapter
 
     lateinit var binding: FragmentListBinding
@@ -49,7 +47,7 @@ class ListFragment : Fragment(), ListView {
         get() = job + Dispatchers.Main
     private val scope = CoroutineScope(coroutineContext)
 
-    lateinit var data: List<HatebuEntry>
+    lateinit var data: MutableList<HatebuEntry>
 
     companion object {
         val VIEW_TYPE_KEY = "view_type"

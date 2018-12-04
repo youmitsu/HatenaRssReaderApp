@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
+import youmeee.co.jp.hatenarssreaderapp.presentation.BindableAdapter
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopRecyclerViewAdapter
 
 /**
@@ -53,6 +54,13 @@ class CustomBinder {
         fun setRecyclerAdapter(view: RecyclerView, adapter: TopRecyclerViewAdapter) {
             view.adapter = adapter
         }
-    }
 
+        @JvmStatic
+        @BindingAdapter("app:data")
+        fun <T> setRecyclerView(view: RecyclerView, itemList: T) {
+            if (view.adapter is BindableAdapter<*>) {
+                (view.adapter as BindableAdapter<T>).setData(itemList)
+            }
+        }
+    }
 }

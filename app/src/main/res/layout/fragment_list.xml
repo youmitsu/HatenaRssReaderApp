@@ -3,21 +3,13 @@
 
     <data>
 
-        <variable
-            name="hasFixedSize"
-            type="Boolean" />
+        <import type="java.util.List" />
+
+        <import type="youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry" />
 
         <variable
-            name="itemDecoration"
-            type="android.support.v7.widget.DividerItemDecoration" />
-
-        <variable
-            name="layoutManager"
-            type="android.support.v7.widget.RecyclerView.LayoutManager" />
-
-        <variable
-            name="adapter"
-            type="youmeee.co.jp.hatenarssreaderapp.presentation.TopRecyclerViewAdapter" />
+            name="itemList"
+            type="List&lt;HatebuEntry&gt;" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,14 +25,11 @@
             android:layout_height="0dp"
             android:divider="@color/gray_dcdcdc"
             android:dividerHeight="1dp"
-            app:hasFixedSize="@{hasFixedSize}"
-            app:itemDecoration="@{itemDecoration}"
-            app:layoutManager="@{layoutManager}"
+            app:data="@{itemList}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:recyclerAdapter="@{adapter}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
