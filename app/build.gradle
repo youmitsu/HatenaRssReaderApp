@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.kotlin.kapt'
 
 android {
     compileSdkVersion 27
@@ -27,12 +27,6 @@ android {
     }
 }
 
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}
-
 kapt {
     generateStubs = true
 }
@@ -43,7 +37,7 @@ ext {
     butterknife_version = '8.5.1'
     room_version = '1.1.1'
     archLifecycleVersion = '1.1.1'
-    coroutines_version = '0.26.1'
+    coroutines_version = '1.0.1'
     google_service_version = '16.0.1'
     retrofit_version = '2.5.0'
     dagger_version = '2.15'
@@ -53,7 +47,7 @@ ext {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:$support_library"
     implementation "com.android.support.constraint:constraint-layout:1.0.2"
