@@ -2,6 +2,7 @@ package youmeee.co.jp.hatenarssreaderapp.presentation.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
@@ -17,6 +18,7 @@ import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.Main
 import kotlinx.coroutines.experimental.launch
 import youmeee.co.jp.hatenarssreaderapp.R
+import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopRecyclerViewAdapter
@@ -39,6 +41,8 @@ class ListFragment : Fragment(), ListView {
     lateinit var viewType: ViewType
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: TopRecyclerViewAdapter
+
+    lateinit var binding: FragmentListBinding
 
     private val job = Job()
     private val coroutineContext: CoroutineContext
@@ -69,31 +73,20 @@ class ListFragment : Fragment(), ListView {
         arguments?.let {
             viewType = ViewType.fromValue(it.getInt(VIEW_TYPE_KEY))
         }
-        val view = LayoutInflater.from(context).inflate(R.layout.fragment_list, null)
-
-        recyclerView = view.findViewById(R.id.recycler_view)
-        val dividerItemDecoration = DividerItemDecoration(recyclerView.context,
-                LinearLayoutManager(activity).orientation)
-        recyclerView.addItemDecoration(dividerItemDecoration)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
         scope.launch {
+            binding.hasFixedSize = true
+            binding.itemDecoration = DividerItemDecoration(context, LinearLayoutManager(activity).orientation)
+            binding.layoutManager = LinearLayoutManager(context)
             data = presenter.loadRss(viewType).items ?: mutableListOf()
-            adapter = TopRecyclerViewAdapter(context!!,
+            binding.adapter = TopRecyclerViewAdapter(context!!,
                     { v: View, entry: HatebuEntry ->
                         val intent = Intent(context, DetailActivity::class.java)
                         intent.putExtra(DetailActivity.ENTRY_KEY, entry)
                         startActivity(intent)
                     }, data)
-            recyclerView.adapter = adapter
         }
-
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        return binding.root
     }
 
     override fun setData(hatebuFeed: HatebuFeed) {
