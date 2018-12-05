@@ -17,21 +17,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
         <ImageView
             android:id="@+id/thumbnail"
             android:layout_width="0dp"
             android:layout_height="@dimen/detail_thumbnail_image"
             app:imageUrl="@{entry.imageurl}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/list_item_side_padding"
-            android:layout_marginRight="@dimen/list_item_side_padding"
             android:layout_marginTop="@dimen/detail_thumbnail_margin_top"
+            android:layout_marginRight="@dimen/list_item_side_padding"
             android:ellipsize="end"
             android:maxLines="6"
             android:text="@{entry.title}"
@@ -53,10 +63,10 @@
             android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/list_item_side_padding"
-            android:layout_marginRight="@dimen/list_item_side_padding"
             android:layout_marginStart="@dimen/list_item_side_padding"
+            android:layout_marginLeft="@dimen/list_item_side_padding"
             android:layout_marginTop="@dimen/list_item_vertical_margin"
+            android:layout_marginRight="@dimen/list_item_side_padding"
             android:text="@{entry.description}"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,9 +77,9 @@
             android:id="@+id/bookmark_count"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_description_top_margin"
             android:layout_marginEnd="@dimen/list_item_side_padding"
             android:layout_marginRight="@dimen/list_item_side_padding"
-            android:layout_marginTop="@dimen/detail_description_top_margin"
             android:text='@{entry.bookmarkcount+"ブックマーク"}'
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,9 +89,9 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_description_top_margin"
             android:layout_marginEnd="@dimen/list_item_side_padding"
             android:layout_marginRight="@dimen/list_item_side_padding"
-            android:layout_marginTop="@dimen/detail_description_top_margin"
             app:dateForString="@{entry.date}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bookmark_count" />
@@ -90,8 +100,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/list_item_side_padding"
-            android:layout_marginRight="@dimen/list_item_side_padding"
             android:layout_marginTop="@dimen/button_bottom_margin"
+            android:layout_marginRight="@dimen/list_item_side_padding"
             android:onClick="@{activity::onClick}"
             android:text="@string/deital_see"
             app:layout_constraintLeft_toLeftOf="parent"
