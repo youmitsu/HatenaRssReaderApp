@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
+import youmeee.co.jp.hatenarssreaderapp.util.CustomBinder
 
 
 /**
@@ -26,6 +27,7 @@ class TopRecyclerViewAdapter(
 
     init {
         requestOptions.error(R.drawable.no_image)
+        requestOptions.fitCenter()
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
@@ -55,6 +57,7 @@ class TopRecyclerViewAdapter(
         val entry = itemList[position]
         holder.apply {
             titleView.text = entry.title
+            CustomBinder.dateForString(date, entry.date)
             Glide.with(context)
                     .load(entry.imageurl)
                     .apply(requestOptions)
@@ -65,6 +68,7 @@ class TopRecyclerViewAdapter(
     class TopRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleView: TextView = view.findViewById(R.id.title)
         val thumbnailView: ImageView = view.findViewById(R.id.thumbnail)
+        val date: TextView = view.findViewById(R.id.date)
     }
 
 }
