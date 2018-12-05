@@ -49,7 +49,6 @@ class AppModule {
     fun provideRssRepository(rssApi: RssApi): RssRepository = RssRepository(rssApi)
 
     @Provides
-    @Singleton
     fun provideTopPresenter(respository: RssRepository) =
             TopPresenter(respository)
 }
