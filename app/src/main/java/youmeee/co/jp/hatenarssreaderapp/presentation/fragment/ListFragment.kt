@@ -39,7 +39,13 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
     lateinit var presenter: TopPresenter
     private lateinit var binding: FragmentListBinding
     private lateinit var viewType: ViewType
-    private lateinit var itemList: MutableList<HatebuEntry>
+    private var itemList: MutableList<HatebuEntry> = mutableListOf()
+        set(value) {
+            field.clear()
+            for (item in value) {
+                field.add(item)
+            }
+        }
 
     private val job = Job()
     private val coroutineContext: CoroutineContext
@@ -92,12 +98,7 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
     }
 
     override fun setData(items: MutableList<HatebuEntry>?) {
-        this.itemList.clear()
-        items?.let {
-            for (item in it) {
-                this.itemList.add(item)
-            }
-        }
+        this.itemList = items ?: mutableListOf()
         recycler_view.adapter.notifyDataSetChanged()
     }
 
