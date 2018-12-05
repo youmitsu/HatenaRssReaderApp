@@ -80,7 +80,7 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
         scope.launch {
             itemList = presenter.loadRss(viewType).items ?: mutableListOf()
             recycler_view.adapter = TopRecyclerViewAdapter(context!!,
-                    { v: View, entry: HatebuEntry ->
+                    { entry: HatebuEntry ->
                         val intent = Intent(context, DetailActivity::class.java)
                         intent.putExtra(DetailActivity.ENTRY_KEY, entry)
                         startActivity(intent)

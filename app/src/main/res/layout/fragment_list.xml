@@ -8,11 +8,11 @@
 
         <variable
             name="isLoading"
-            type="Boolean" />
+            type="boolean" />
 
         <variable
             name="isError"
-            type="Boolean" />
+            type="boolean" />
     </data>
 
     <android.support.constraint.ConstraintLayout
