@@ -18,6 +18,7 @@ import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.Main
 import kotlinx.coroutines.experimental.launch
+import org.threeten.bp.ZonedDateTime
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
@@ -42,7 +43,7 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
     private var itemList: MutableList<HatebuEntry> = mutableListOf()
         set(value) {
             field.clear()
-            for (item in value) {
+            for (item in value.sortedByDescending { ZonedDateTime.parse(it.date).toEpochSecond() }) {
                 field.add(item)
             }
         }
