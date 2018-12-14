@@ -1,6 +1,6 @@
 package youmeee.co.jp.hatenarssreaderapp.net
 
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
 

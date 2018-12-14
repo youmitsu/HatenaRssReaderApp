@@ -13,11 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_list.*
-import kotlinx.coroutines.experimental.CoroutineScope
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.android.Main
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.runBlocking
 import org.threeten.bp.ZonedDateTime
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
@@ -28,7 +24,6 @@ import youmeee.co.jp.hatenarssreaderapp.presentation.view.ListView
 import youmeee.co.jp.hatenarssreaderapp.presenter.TopPresenter
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 import javax.inject.Inject
-import kotlin.coroutines.experimental.CoroutineContext
 
 
 /**
@@ -47,11 +42,6 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
                 field.add(item)
             }
         }
-
-    private val job = Job()
-    private val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.Main
-    private val scope = CoroutineScope(coroutineContext)
 
     companion object {
         val VIEW_TYPE_KEY = "view_type"
@@ -84,7 +74,7 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         swipeRefreshLayout.setOnRefreshListener(this)
-        scope.launch {
+        runBlocking {
             itemList = presenter.loadRss(viewType).items ?: mutableListOf()
             recycler_view.adapter = TopRecyclerViewAdapter(context!!,
                     { entry: HatebuEntry ->
@@ -107,11 +97,10 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
         binding.isError = true
     }
 
-    override fun onRefresh() {
-        scope.launch {
-            binding.isError = false
-            setData(presenter.loadRss(viewType).items)
-            swipeRefreshLayout.isRefreshing = false
-        }
+    override fun onRefresh() = runBlocking {
+        binding.isError = false
+        setData(presenter.loadRss(viewType).items)
+        swipeRefreshLayout.isRefreshing = false
     }
+
 }
