@@ -6,6 +6,7 @@ import org.simpleframework.xml.Root
 /**
  * HatebuChannel
  */
+@Suppress("ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR")
 @Root(name = "channel", strict = false)
 class HatebuChannel {
     @set:Element

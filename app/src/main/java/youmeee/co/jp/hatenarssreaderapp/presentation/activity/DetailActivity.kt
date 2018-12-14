@@ -38,7 +38,7 @@ class DetailActivity : AppCompatActivity() {
         finish()
         return true
     }
-
+    
     fun onClick(view: View) {
         val url = Uri.parse(entry.link)
         startActivity(Intent(Intent.ACTION_VIEW, url))

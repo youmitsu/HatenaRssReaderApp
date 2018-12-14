@@ -1,6 +1,5 @@
 package youmeee.co.jp.hatenarssreaderapp.util
 
-import android.annotation.SuppressLint
 import android.databinding.BindingAdapter
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,28 +12,21 @@ import youmeee.co.jp.hatenarssreaderapp.R
 /**
  * CustomBinder
  */
-class CustomBinder {
 
-    companion object {
-        private val requestOptions = RequestOptions()
+private val requestOptions = RequestOptions()
 
-        @SuppressLint("CheckResult")
-        @JvmStatic
-        @BindingAdapter("app:imageUrl")
-        fun imageUrl(imageView: ImageView, url: String) {
-            requestOptions.error(R.drawable.no_image)
-            Glide.with(imageView.context)
-                    .load(url)
-                    .apply(requestOptions)
-                    .into(imageView)
-        }
+@BindingAdapter("app:imageUrl")
+fun ImageView.setImageUrl(url: String) {
+    requestOptions.error(R.drawable.no_image)
+    Glide.with(context)
+            .load(url)
+            .apply(requestOptions)
+            .into(this)
+}
 
-        @JvmStatic
-        @BindingAdapter("app:dateForString")
-        fun dateForString(textView: TextView, date: String) {
-            val date = ZonedDateTime.parse(date)
-            val formatter = DateTimeFormatter.ofPattern(textView.context.getString(R.string.detail_date_format_pattern))
-            textView.text = date.format(formatter)
-        }
-    }
+@BindingAdapter("app:dateForString")
+fun TextView.setDateForString(date: String) {
+    val d = ZonedDateTime.parse(date)
+    val formatter = DateTimeFormatter.ofPattern(context.getString(R.string.detail_date_format_pattern))
+    text = d.format(formatter)
 }

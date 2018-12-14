@@ -6,6 +6,9 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -31,6 +34,13 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
+    dexOptions {
+        jumboMode = true
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 kapt {
@@ -53,7 +63,7 @@ ext {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:$support_library"
     implementation "com.android.support.constraint:constraint-layout:1.0.2"

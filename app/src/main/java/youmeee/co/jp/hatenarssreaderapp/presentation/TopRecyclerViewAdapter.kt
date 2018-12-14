@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
-import youmeee.co.jp.hatenarssreaderapp.util.CustomBinder
 
 
 /**
@@ -57,7 +56,6 @@ class TopRecyclerViewAdapter(
         val entry = itemList[position]
         holder.apply {
             titleView.text = entry.title
-            CustomBinder.dateForString(date, entry.date)
             Glide.with(context)
                     .load(entry.imageurl)
                     .apply(requestOptions)
