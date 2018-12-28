@@ -13,7 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_list.*
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.threeten.bp.ZonedDateTime
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
@@ -42,6 +45,9 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
                 field.add(item)
             }
         }
+
+    private val job = Job()
+    private val coroutineScope = CoroutineScope(job + Dispatchers.Main)
 
     companion object {
         val VIEW_TYPE_KEY = "view_type"
@@ -74,7 +80,7 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         swipeRefreshLayout.setOnRefreshListener(this)
-        runBlocking {
+        coroutineScope.launch {
             itemList = presenter.loadRss(viewType).items ?: mutableListOf()
             recycler_view.adapter = TopRecyclerViewAdapter(context!!,
                     { entry: HatebuEntry ->
@@ -97,10 +103,12 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
         binding.isError = true
     }
 
-    override fun onRefresh() = runBlocking {
-        binding.isError = false
-        setData(presenter.loadRss(viewType).items)
-        swipeRefreshLayout.isRefreshing = false
+    override fun onRefresh() {
+        coroutineScope.launch {
+            binding.isError = false
+            setData(presenter.loadRss(viewType).items)
+            swipeRefreshLayout.isRefreshing = false
+        }
     }
 
 }
