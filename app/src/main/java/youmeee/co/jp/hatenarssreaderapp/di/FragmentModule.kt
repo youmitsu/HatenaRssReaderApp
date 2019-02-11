@@ -13,5 +13,5 @@ abstract class FragmentModule {
     // Activityと同様に@ContributesAndroidInjectorを定義する
 
     @ContributesAndroidInjector
-    abstract fun contributeFirstFragment(): ListFragment
+    abstract fun contributeListFragment(): ListFragment
 }

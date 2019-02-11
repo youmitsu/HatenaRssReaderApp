@@ -2,15 +2,15 @@ package youmeee.co.jp.hatenarssreaderapp.presentation.fragment
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +18,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.threeten.bp.ZonedDateTime
-import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopRecyclerViewAdapter
@@ -27,7 +26,7 @@ import youmeee.co.jp.hatenarssreaderapp.presentation.view.ListView
 import youmeee.co.jp.hatenarssreaderapp.presenter.TopPresenter
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 import javax.inject.Inject
-
+import youmeee.co.jp.hatenarssreaderapp.R
 
 /**
  * ListFragment
@@ -61,7 +60,7 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
         }
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }
@@ -82,21 +81,21 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
         swipeRefreshLayout.setOnRefreshListener(this)
         coroutineScope.launch {
             itemList = presenter.loadRss(viewType).items ?: mutableListOf()
-            recycler_view.adapter = TopRecyclerViewAdapter(context!!,
+            binding.recyclerView.adapter = TopRecyclerViewAdapter(context!!,
                     { entry: HatebuEntry ->
                         val intent = Intent(context, DetailActivity::class.java)
                         intent.putExtra(DetailActivity.ENTRY_KEY, entry)
                         startActivity(intent)
                     }, itemList)
-            recycler_view.layoutManager = LinearLayoutManager(context)
-            recycler_view.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(activity).orientation))
+            binding.recyclerView.layoutManager = LinearLayoutManager(context)
+            binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(activity).orientation))
             binding.isLoading = false
         }
     }
 
     override fun setData(items: MutableList<HatebuEntry>?) {
         this.itemList = items ?: mutableListOf()
-        recycler_view.adapter.notifyDataSetChanged()
+        recycler_view.adapter?.notifyDataSetChanged()
     }
 
     override fun showErrorBar() {
