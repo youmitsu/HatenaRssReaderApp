@@ -1,12 +1,12 @@
 package youmeee.co.jp.hatenarssreaderapp.presentation
 
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import youmeee.co.jp.hatenarssreaderapp.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import youmeee.co.jp.hatenarssreaderapp.presentation.fragment.ListFragment
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
+import youmeee.co.jp.hatenarssreaderapp.R
 
 /**
  * TopViewPagerAdapter

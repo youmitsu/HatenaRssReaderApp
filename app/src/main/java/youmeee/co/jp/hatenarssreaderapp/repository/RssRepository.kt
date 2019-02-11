@@ -1,6 +1,6 @@
 package youmeee.co.jp.hatenarssreaderapp.repository
 
-import android.support.annotation.WorkerThread
+import androidx.annotation.WorkerThread
 import youmeee.co.jp.hatenarssreaderapp.net.RssApi
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
 import youmeee.co.jp.hatenarssreaderapp.util.ApiResult

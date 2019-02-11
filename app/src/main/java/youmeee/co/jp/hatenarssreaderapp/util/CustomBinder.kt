@@ -1,9 +1,9 @@
 package youmeee.co.jp.hatenarssreaderapp.util
 
 import android.annotation.SuppressLint
-import android.databinding.BindingAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import org.threeten.bp.ZonedDateTime

@@ -9,8 +9,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import youmeee.co.jp.hatenarssreaderapp.BuildConfig
 import youmeee.co.jp.hatenarssreaderapp.net.RssApi
-import youmeee.co.jp.hatenarssreaderapp.presenter.TopPresenter
-import youmeee.co.jp.hatenarssreaderapp.repository.RssRepository
 import javax.inject.Singleton
 
 /**
@@ -43,12 +41,4 @@ class AppModule {
     @Singleton
     fun provideRssApi(retrofit: Retrofit): RssApi =
             retrofit.create(RssApi::class.java)
-
-    @Provides
-    @Singleton
-    fun provideRssRepository(rssApi: RssApi): RssRepository = RssRepository(rssApi)
-
-    @Provides
-    fun provideTopPresenter(respository: RssRepository) =
-            TopPresenter(respository)
 }
