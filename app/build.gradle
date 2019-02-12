@@ -37,7 +37,7 @@ ext {
     dagger_version = '2.20'
     butterknife_version = '8.5.1'
     room_version = '1.1.1'
-    archLifecycleVersion = '1.1.1'
+    archLifecycleVersion = '2.0.0'
     coroutines_version = '1.0.1'
     google_service_version = '16.0.1'
     retrofit_version = '2.5.0'
@@ -57,6 +57,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha02'
     // Lifecycle components
+    implementation "androidx.arch.core:core-runtime:2.0.1-alpha01"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha02'
     kapt 'androidx.lifecycle:lifecycle-compiler:2.1.0-alpha02'
     // Coroutines
