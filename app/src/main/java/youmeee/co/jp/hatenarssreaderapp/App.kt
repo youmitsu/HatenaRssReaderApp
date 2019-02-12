@@ -22,7 +22,7 @@ open class App : Application(), HasActivityInjector {
         val component = DaggerAppComponent.builder()
                 .create(this)
         component.inject(this)
-        AndroidThreeTen.init(this);
+        AndroidThreeTen.init(this)
     }
 
     override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector

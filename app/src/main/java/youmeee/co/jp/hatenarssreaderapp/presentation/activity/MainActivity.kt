@@ -2,17 +2,14 @@ package youmeee.co.jp.hatenarssreaderapp.presentation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
-import youmeee.co.jp.hatenarssreaderapp.presentation.TopViewPagerAdapter
-import javax.inject.Inject
 import youmeee.co.jp.hatenarssreaderapp.R
+import youmeee.co.jp.hatenarssreaderapp.presentation.TopViewPagerAdapter
+import youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel.TopViewModel
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
+class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val OFF_SCREEN_PAGE_LIMIT = 4
@@ -20,7 +17,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     private lateinit var viewPgaerAdapter: TopViewPagerAdapter
     @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var viewModel: TopViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -31,9 +28,5 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         view_pager.offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
         view_pager.adapter = viewPgaerAdapter
         tab_layout.setupWithViewPager(view_pager)
-    }
-
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return fragmentInjector
     }
 }

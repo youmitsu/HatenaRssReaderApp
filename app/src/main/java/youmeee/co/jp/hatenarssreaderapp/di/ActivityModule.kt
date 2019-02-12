@@ -9,6 +9,6 @@ import youmeee.co.jp.hatenarssreaderapp.presentation.activity.MainActivity
  */
 @Module
 abstract class ActivityModule {
-    @ContributesAndroidInjector(modules = [FragmentModule::class])
+    @ContributesAndroidInjector(modules = [MainActivityModule::class])
     abstract fun contributeMainActivity(): MainActivity
 }

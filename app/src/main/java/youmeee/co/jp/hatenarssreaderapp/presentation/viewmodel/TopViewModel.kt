@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
 import youmeee.co.jp.hatenarssreaderapp.util.ApiResult
 
-class TopViewModel : ViewModel() {
+open class TopViewModel : ViewModel() {
 
     val result: LiveData<ApiResult<HatebuFeed>>
         get() {
@@ -14,5 +14,5 @@ class TopViewModel : ViewModel() {
         }
     val mResult = MutableLiveData<ApiResult<HatebuFeed>>()
 
-    
+
 }
