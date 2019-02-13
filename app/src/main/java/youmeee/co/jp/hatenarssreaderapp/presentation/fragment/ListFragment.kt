@@ -42,6 +42,7 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
                 field.add(item)
             }
         }
+    private lateinit var viewModel: TopViewModel
 
     private val job = Job()
     private val coroutineScope = CoroutineScope(job + Dispatchers.Main)
@@ -66,25 +67,24 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
         binding.isLoading = true
         binding.isError = false
         //presenter.setView(this)
-        val viewModel = ViewModelProviders.of(requireActivity()).get(TopViewModel::class.java)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProviders.of(requireActivity()).get(TopViewModel::class.java)
+        viewModel.loadRss()
         swipeRefreshLayout.setOnRefreshListener(this)
-        coroutineScope.launch {
-            //itemList = presenter.loadRss(viewType).items ?: mutableListOf()
-            binding.recyclerView.adapter = TopRecyclerViewAdapter(context!!,
-                    { entry: HatebuEntry ->
-                        val intent = Intent(context, DetailActivity::class.java)
-                        intent.putExtra(DetailActivity.ENTRY_KEY, entry)
-                        startActivity(intent)
-                    }, itemList)
-            binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(activity).orientation))
-            binding.isLoading = false
-        }
+        //itemList = presenter.loadRss(viewType).items ?: mutableListOf()
+        binding.recyclerView.adapter = TopRecyclerViewAdapter(context!!,
+                { entry: HatebuEntry ->
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.ENTRY_KEY, entry)
+                    startActivity(intent)
+                }, viewModel.result.value!!.value.items!!)
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(activity).orientation))
+        binding.isLoading = false
     }
 
     override fun setData(items: MutableList<HatebuEntry>?) {

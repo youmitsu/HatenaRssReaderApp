@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.util.CustomBinder
-import youmeee.co.jp.hatenarssreaderapp.R
 
 /**
  * TopRecyclerViewAdapter
@@ -19,7 +19,7 @@ import youmeee.co.jp.hatenarssreaderapp.R
 class TopRecyclerViewAdapter(
         private val context: Context,
         private val itemClickListener: (hatebuEntry: HatebuEntry) -> Unit,
-        private val itemList: List<HatebuEntry>) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
+        private val itemList: MutableList<HatebuEntry>) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
 
     private var mRecyclerView: RecyclerView? = null
     private val requestOptions = RequestOptions()
