@@ -19,7 +19,7 @@ import youmeee.co.jp.hatenarssreaderapp.util.CustomBinder
 class TopRecyclerViewAdapter(
         private val context: Context,
         private val itemClickListener: (hatebuEntry: HatebuEntry) -> Unit,
-        private val itemList: MutableList<HatebuEntry>) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
+        private val itemList: List<HatebuEntry>?) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
 
     private var mRecyclerView: RecyclerView? = null
     private val requestOptions = RequestOptions()
@@ -43,8 +43,8 @@ class TopRecyclerViewAdapter(
         val layouteInflater = LayoutInflater.from(context)
         val view = layouteInflater.inflate(R.layout.fragment_list_item, parent, false)
         view.setOnClickListener {
-            mRecyclerView?.let {
-                itemClickListener.invoke(itemList[it.getChildAdapterPosition(view)])
+            mRecyclerView?.let { r ->
+                itemList?.let { e -> itemClickListener.invoke(e[r.getChildAdapterPosition(view)]) }
             }
         }
         return TopRecyclerViewHolder(view)

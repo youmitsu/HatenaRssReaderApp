@@ -4,26 +4,26 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
-import youmeee.co.jp.hatenarssreaderapp.util.ApiResult
-import youmeee.co.jp.hatenarssreaderapp.util.SUCCESS
 
 open class TopViewModel : ViewModel() {
 
     private val job = Job()
-    private val scope = CoroutineScope(job)
+    private val scope = CoroutineScope(job + Dispatchers.Main)
 
-    val result: LiveData<ApiResult<HatebuFeed>>
+    val entries: LiveData<List<HatebuEntry>>
         get() {
-            return mResult
+            return mEntries
         }
-    private val mResult = MutableLiveData<ApiResult<HatebuFeed>>()
+    private val mEntries = MutableLiveData<List<HatebuEntry>>()
 
     fun loadRss() {
         scope.launch {
-            mResult.value = SUCCESS(HatebuFeed())
+            mEntries.value = HatebuFeed().items ?: listOf()
         }
     }
 }

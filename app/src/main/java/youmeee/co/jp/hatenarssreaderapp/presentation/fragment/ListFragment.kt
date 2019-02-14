@@ -81,7 +81,7 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
                     val intent = Intent(context, DetailActivity::class.java)
                     intent.putExtra(DetailActivity.ENTRY_KEY, entry)
                     startActivity(intent)
-                }, viewModel.result.value!!.value.items!!)
+                }, viewModel.entries.value)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(activity).orientation))
         binding.isLoading = false
