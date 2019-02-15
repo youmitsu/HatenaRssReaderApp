@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
 
-open class TopViewModel : ViewModel() {
+open class MainViewModel : ViewModel() {
 
     private val job = Job()
     private val scope = CoroutineScope(job + Dispatchers.Main)

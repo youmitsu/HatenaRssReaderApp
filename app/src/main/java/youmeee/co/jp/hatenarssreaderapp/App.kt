@@ -2,28 +2,26 @@ package youmeee.co.jp.hatenarssreaderapp
 
 import android.app.Activity
 import android.app.Application
+import android.os.Bundle
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.DaggerApplication
+import youmeee.co.jp.hatenarssreaderapp.di.AppModule
 import youmeee.co.jp.hatenarssreaderapp.di.DaggerAppComponent
-import javax.inject.Inject
 
 /**
  * App
  */
-open class App : Application(), HasActivityInjector {
+open class App : DaggerApplication() {
 
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder()
+                .appModule(AppModule(this))
+                .build()
+    }
 
     override fun onCreate() {
         super.onCreate()
-        val component = DaggerAppComponent.builder()
-                .create(this)
-        component.inject(this)
         AndroidThreeTen.init(this)
     }
-
-    override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
 }

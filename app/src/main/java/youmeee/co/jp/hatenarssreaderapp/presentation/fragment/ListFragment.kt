@@ -18,7 +18,7 @@ import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopRecyclerViewAdapter
 import youmeee.co.jp.hatenarssreaderapp.presentation.activity.DetailActivity
-import youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel.TopViewModel
+import youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel.MainViewModel
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 
 /**
@@ -26,11 +26,9 @@ import youmeee.co.jp.hatenarssreaderapp.util.ViewType
  */
 class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
-    //    @Inject
-//    lateinit var presenter: TopPresenter
     private lateinit var binding: FragmentListBinding
     private lateinit var viewType: ViewType
-    private lateinit var viewModel: TopViewModel
+    private lateinit var viewModel: MainViewModel
 
     companion object {
         val VIEW_TYPE_KEY = "view_type"
@@ -54,7 +52,7 @@ class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(requireActivity()).get(TopViewModel::class.java)
+        viewModel = ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java)
         viewModel.entries.observe(this, Observer {
             binding.recyclerView.adapter?.notifyDataSetChanged()
         })
@@ -71,7 +69,6 @@ class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         binding.isError = false
         viewModel.loadRss()
         binding.isLoading = false
-
     }
 
     override fun onRefresh() {

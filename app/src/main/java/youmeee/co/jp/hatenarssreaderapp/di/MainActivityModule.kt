@@ -1,15 +1,27 @@
 package youmeee.co.jp.hatenarssreaderapp.di
 
-import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatActivity
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.android.ContributesAndroidInjector
 import youmeee.co.jp.hatenarssreaderapp.presentation.activity.MainActivity
-import youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel.TopViewModel
+import youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel.MainViewModel
 
 @Module
-class MainActivityModule {
-    @Provides
-    fun provideTopViewModel(activity: MainActivity): TopViewModel {
-        return ViewModelProviders.of(activity).get(TopViewModel::class.java)
-    }
+interface MainActivityBuilder {
+    @PerActivity
+    @ContributesAndroidInjector(modules = [
+        MainActivityModule::class,
+        MainViewModelModule::class
+    ])
+    fun contributeMainActivity(): MainActivity
 }
+
+@Module
+interface MainActivityModule {
+    @Binds
+    fun provideAppCompatActivity(mainActivity: MainActivity): AppCompatActivity
+}
+
+@Module
+class MainViewModelModule : ViewModelModule<MainViewModel>(MainViewModel::class.java)
