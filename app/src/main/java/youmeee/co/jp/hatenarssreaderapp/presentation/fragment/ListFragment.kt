@@ -7,45 +7,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.android.synthetic.main.fragment_list.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import org.threeten.bp.ZonedDateTime
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopRecyclerViewAdapter
 import youmeee.co.jp.hatenarssreaderapp.presentation.activity.DetailActivity
-import youmeee.co.jp.hatenarssreaderapp.presentation.view.ListView
 import youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel.TopViewModel
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 
 /**
  * ListFragment
  */
-class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener {
+class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     //    @Inject
 //    lateinit var presenter: TopPresenter
     private lateinit var binding: FragmentListBinding
     private lateinit var viewType: ViewType
-    private var itemList: MutableList<HatebuEntry> = mutableListOf()
-        set(value) {
-            field.clear()
-            for (item in value.sortedByDescending { ZonedDateTime.parse(it.date).toEpochSecond() }) {
-                field.add(item)
-            }
-        }
     private lateinit var viewModel: TopViewModel
-
-    private val job = Job()
-    private val coroutineScope = CoroutineScope(job + Dispatchers.Main)
 
     companion object {
         val VIEW_TYPE_KEY = "view_type"
@@ -64,18 +49,16 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
         arguments?.let {
             viewType = ViewType.fromValue(it.getInt(VIEW_TYPE_KEY))
         }
-        binding.isLoading = true
-        binding.isError = false
-        //presenter.setView(this)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(requireActivity()).get(TopViewModel::class.java)
-        viewModel.loadRss()
+        viewModel.entries.observe(this, Observer {
+            binding.recyclerView.adapter?.notifyDataSetChanged()
+        })
         swipeRefreshLayout.setOnRefreshListener(this)
-        //itemList = presenter.loadRss(viewType).items ?: mutableListOf()
         binding.recyclerView.adapter = TopRecyclerViewAdapter(context!!,
                 { entry: HatebuEntry ->
                     val intent = Intent(context, DetailActivity::class.java)
@@ -84,24 +67,16 @@ class ListFragment : Fragment(), ListView, SwipeRefreshLayout.OnRefreshListener 
                 }, viewModel.entries.value)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(activity).orientation))
+        binding.isLoading = true
+        binding.isError = false
+        viewModel.loadRss()
         binding.isLoading = false
-    }
 
-    override fun setData(items: MutableList<HatebuEntry>?) {
-        this.itemList = items ?: mutableListOf()
-        recycler_view.adapter?.notifyDataSetChanged()
-    }
-
-    override fun showErrorBar() {
-        binding.isError = true
     }
 
     override fun onRefresh() {
-        coroutineScope.launch {
-            binding.isError = false
-            //setData(presenter.loadRss(viewType).items)
-            swipeRefreshLayout.isRefreshing = false
-        }
+        binding.isError = false
+        swipeRefreshLayout.isRefreshing = false
     }
 
 }

@@ -50,10 +50,10 @@ class TopRecyclerViewAdapter(
         return TopRecyclerViewHolder(view)
     }
 
-    override fun getItemCount(): Int = itemList.size
+    override fun getItemCount(): Int = itemList?.size ?: 0
 
     override fun onBindViewHolder(holder: TopRecyclerViewHolder, position: Int) {
-        val entry = itemList[position]
+        val entry = itemList?.get(position) ?: HatebuEntry()
         holder.apply {
             titleView.text = entry.title
             CustomBinder.dateForString(date, entry.date)
