@@ -5,16 +5,17 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import kotlinx.android.synthetic.main.activity_detail.*
+import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.databinding.ActivityDetailBinding
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
-import youmeee.co.jp.hatenarssreaderapp.R
 
 /**
  * DetailActivity
  */
-class DetailActivity : BaseActivity() {
+class DetailActivity : AppCompatActivity() {
 
     private lateinit var entry: HatebuEntry
 

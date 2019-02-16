@@ -9,8 +9,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
+import youmeee.co.jp.hatenarssreaderapp.repository.RssRepository
+import javax.inject.Inject
 
-open class MainViewModel : ViewModel() {
+class MainViewModel @Inject constructor(
+        val repository: RssRepository
+) : ViewModel() {
 
     private val job = Job()
     private val scope = CoroutineScope(job + Dispatchers.Main)
