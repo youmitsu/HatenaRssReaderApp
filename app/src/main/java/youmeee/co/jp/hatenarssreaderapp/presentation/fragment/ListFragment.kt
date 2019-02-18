@@ -59,7 +59,7 @@ class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Injectabl
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
         viewModel.entries.observe(this, Observer {
-            binding.recyclerView.adapter?.notifyDataSetChanged()
+            binding.recyclerView.adapter.notifyDataSetChanged()
         })
         swipeRefreshLayout.setOnRefreshListener(this)
         binding.recyclerView.adapter = TopRecyclerViewAdapter(context!!,
