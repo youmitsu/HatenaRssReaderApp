@@ -8,8 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
-import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
 import youmeee.co.jp.hatenarssreaderapp.repository.RssRepository
+import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
@@ -25,9 +25,9 @@ class MainViewModel @Inject constructor(
         }
     private val mEntries = MutableLiveData<List<HatebuEntry>>()
 
-    fun loadRss() {
+    fun loadRss(viewType: ViewType) {
         scope.launch {
-            mEntries.value = HatebuFeed().items ?: listOf()
+            mEntries.value = repository.getRss(viewType).value.items
         }
     }
 }

@@ -73,7 +73,7 @@ class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Injectabl
         binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(activity).orientation))
         binding.isLoading = true
         binding.isError = false
-        viewModel.loadRss()
+        viewModel.loadRss(viewType)
         binding.isLoading = false
     }
 
