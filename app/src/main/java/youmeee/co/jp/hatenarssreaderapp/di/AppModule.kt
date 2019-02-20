@@ -41,4 +41,5 @@ class AppModule {
     @Singleton
     fun provideRssApi(retrofit: Retrofit): RssApi =
             retrofit.create(RssApi::class.java)
+
 }
