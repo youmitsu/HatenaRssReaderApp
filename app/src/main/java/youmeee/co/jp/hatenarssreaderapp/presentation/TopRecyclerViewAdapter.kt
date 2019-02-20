@@ -18,9 +18,10 @@ import youmeee.co.jp.hatenarssreaderapp.util.CustomBinder
  */
 class TopRecyclerViewAdapter(
         private val context: Context,
-        private val itemClickListener: (hatebuEntry: HatebuEntry) -> Unit,
-        private val itemList: List<HatebuEntry>?) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
+        private val itemClickListener: (hatebuEntry: HatebuEntry) -> Unit
+) : RecyclerView.Adapter<TopRecyclerViewAdapter.TopRecyclerViewHolder>() {
 
+    var itemList: List<HatebuEntry>? = listOf()
     private var mRecyclerView: RecyclerView? = null
     private val requestOptions = RequestOptions()
 

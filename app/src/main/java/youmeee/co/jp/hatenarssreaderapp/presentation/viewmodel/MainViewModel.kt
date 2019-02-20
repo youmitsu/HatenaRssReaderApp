@@ -19,15 +19,33 @@ class MainViewModel @Inject constructor(
     private val job = Job()
     private val scope = CoroutineScope(job + Dispatchers.Main)
 
-    val entries: LiveData<List<HatebuEntry>>
+    val entries: LiveData<MutableMap<ViewType, MutableList<HatebuEntry>>>
         get() {
             return mEntries
         }
-    private val mEntries = MutableLiveData<List<HatebuEntry>>()
+    private val mEntries = MutableMapLiveData()
 
     fun loadRss(viewType: ViewType) {
         scope.launch {
-            mEntries.value = repository.getRss(viewType).value.items
+            val data = repository.getRss(viewType).value.items ?: mutableListOf()
+            mEntries.setValueWithKey(viewType, data)
+        }
+    }
+
+    class MutableMapLiveData : MutableLiveData<MutableMap<ViewType, MutableList<HatebuEntry>>>() {
+
+        init {
+            value = mutableMapOf(
+                    ViewType.ALL to mutableListOf(),
+                    ViewType.SOCIAL to mutableListOf(),
+                    ViewType.ECONOMICS to mutableListOf(),
+                    ViewType.LIFE to mutableListOf()
+            )
+        }
+
+        fun setValueWithKey(viewType: ViewType, list: Collection<HatebuEntry>) {
+            value?.get(viewType)?.addAll(list)
+            super.setValue(value)
         }
     }
 }

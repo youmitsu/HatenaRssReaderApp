@@ -58,28 +58,24 @@ class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Injectabl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
-        viewModel.entries.observe(this, Observer {
+        viewModel.entries.observe(this, Observer { list ->
+            (binding.recyclerView.adapter as? TopRecyclerViewAdapter)?.itemList = list[viewType]
             binding.recyclerView.adapter?.notifyDataSetChanged()
         })
         swipeRefreshLayout.setOnRefreshListener(this)
-        binding.recyclerView.adapter = TopRecyclerViewAdapter(context!!,
-                { entry: HatebuEntry ->
-                    val intent = Intent(context, DetailActivity::class.java)
-                    intent.putExtra(DetailActivity.ENTRY_KEY, entry)
-                    startActivity(intent)
-                },
-                viewModel.entries.value)
+        binding.recyclerView.adapter = TopRecyclerViewAdapter(requireContext()) { entry: HatebuEntry ->
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.ENTRY_KEY, entry)
+            startActivity(intent)
+        }
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(activity).orientation))
-        binding.isLoading = true
-        binding.isError = false
         viewModel.loadRss(viewType)
-        binding.isLoading = false
     }
 
     override fun onRefresh() {
-        binding.isError = false
         swipeRefreshLayout.isRefreshing = false
+        viewModel.loadRss(viewType)
     }
 
 }
