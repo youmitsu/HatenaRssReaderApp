@@ -1,6 +1,6 @@
 package youmeee.co.jp.hatenarssreaderapp.repository
 
-import android.support.annotation.WorkerThread
+import androidx.annotation.WorkerThread
 import youmeee.co.jp.hatenarssreaderapp.net.RssApi
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuFeed
 import youmeee.co.jp.hatenarssreaderapp.util.ApiResult
@@ -8,10 +8,12 @@ import youmeee.co.jp.hatenarssreaderapp.util.FAILED
 import youmeee.co.jp.hatenarssreaderapp.util.SUCCESS
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * RssRepository
  */
+@Singleton
 class RssRepository @Inject constructor(
         private val rssApi: RssApi
 ) {
@@ -24,11 +26,10 @@ class RssRepository @Inject constructor(
             ViewType.ECONOMICS -> rssApi.getEconomicsEntry()
             ViewType.LIFE -> rssApi.getLifeEntry()
         }
-        try {
-            return SUCCESS(getEntry.await())
+        return try {
+            SUCCESS(getEntry.await())
         } catch (e: Exception) {
-            return FAILED(HatebuFeed(), e)
+            FAILED(HatebuFeed(), e)
         }
     }
-
 }
