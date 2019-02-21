@@ -24,11 +24,14 @@ class MainViewModel @Inject constructor(
             return mEntries
         }
     private val mEntries = MutableMapLiveData()
+    private val isLoading = MutableLiveData<Boolean>(false)
 
     fun loadRss(viewType: ViewType) {
+        isLoading.value = true
         scope.launch {
             val data = repository.getRss(viewType).value.items ?: mutableListOf()
             mEntries.setValueWithKey(viewType, data)
+            isLoading.value = false
         }
     }
 
