@@ -62,6 +62,7 @@ class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Injectabl
             (binding.recyclerView.adapter as? TopRecyclerViewAdapter)?.itemList = list[viewType]
             binding.recyclerView.adapter?.notifyDataSetChanged()
         })
+        binding.viewModel = this.viewModel
         swipeRefreshLayout.setOnRefreshListener(this)
         binding.recyclerView.adapter = TopRecyclerViewAdapter(requireContext()) { entry: HatebuEntry ->
             val intent = Intent(context, DetailActivity::class.java)
