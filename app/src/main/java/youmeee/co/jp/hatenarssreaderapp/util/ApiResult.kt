@@ -7,4 +7,3 @@ sealed class ApiResult<V>(open val value: V)
 
 data class SUCCESS<V>(override val value: V) : ApiResult<V>(value)
 data class FAILED<V>(override val value: V, val reason: Exception) : ApiResult<V>(value)
-//TODO: InProgress
