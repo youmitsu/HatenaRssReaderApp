@@ -3,7 +3,10 @@ package youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.repository.RssRepository
 import youmeee.co.jp.hatenarssreaderapp.util.FAILED
@@ -16,62 +19,27 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val job = Job()
-    private val scope = CoroutineScope(job + Dispatchers.Main)
+    private val scope = CoroutineScope(Dispatchers.Main + job)
 
-    val entries: LiveData<MutableMap<ViewType, MutableList<HatebuEntry>>>
+    val entries: LiveData<MutableList<HatebuEntry>>
         get() {
             return mEntries
         }
-    private val mEntries = MutableMapLiveDataWithViewType<MutableList<HatebuEntry>>(mutableListOf())
-    val isLoading = MutableMapLiveDataWithViewType(false)
-    val isError = MutableMapLiveDataWithViewType(false)
+    private val mEntries = MutableLiveData<MutableList<HatebuEntry>>(mutableListOf())
+    val isLoading = MutableLiveData(false)
+    val isError = MutableLiveData(false)
 
     fun loadRss(viewType: ViewType) {
-        isLoading.setValueWithKey(viewType) {}
         scope.launch {
+            isLoading.value = true
             val data = repository.getRss(viewType).value.items ?: mutableListOf()
-            mEntries.setValueWithKey(viewType, data)
-            withContext(Dispatchers.Main) {
-                isError.value = when (data) {
-                    is SUCCESS<*> -> false
-                    is FAILED<*> -> true
-                    else -> false
-                }
-                isLoading.value = false
+            mEntries.value = data
+            isError.value = when (data) {
+                is SUCCESS<*> -> false
+                is FAILED<*> -> true
+                else -> false
             }
-        }
-    }
-//
-//    class MutableMapLiveData : MutableLiveData<MutableMap<ViewType, MutableList<HatebuEntry>>>() {
-//
-//        init {
-//            value = mutableMapOf(
-//                    ViewType.ALL to mutableListOf(),
-//                    ViewType.SOCIAL to mutableListOf(),
-//                    ViewType.ECONOMICS to mutableListOf(),
-//                    ViewType.LIFE to mutableListOf()
-//            )
-//        }
-//
-//        fun setValueWithKey(viewType: ViewType, list: Collection<HatebuEntry>) {
-//            value?.get(viewType)?.addAll(list)
-//            super.setValue(value)
-//        }
-//    }
-
-    class MutableMapLiveDataWithViewType<T>(initValue: T) : MutableLiveData<MutableMap<ViewType, T>>() {
-        init {
-            value = mutableMapOf(
-                    ViewType.ALL to initValue,
-                    ViewType.SOCIAL to initValue,
-                    ViewType.ECONOMICS to initValue,
-                    ViewType.LIFE to initValue
-            )
-        }
-
-        fun setValueWithKey(viewType: ViewType, updateValue: (v: T?) -> Unit) {
-            updateValue(value?.get(viewType))
-            super.setValue(value)
+            isLoading.value = false
         }
     }
 }

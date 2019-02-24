@@ -5,7 +5,11 @@
     <data>
 
         <import type="android.view.View" />
-        
+
+        <variable
+            name="viewType"
+            type="youmeee.co.jp.hatenarssreaderapp.util.ViewType" />
+
         <variable
             name="viewModel"
             type="youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel.MainViewModel" />

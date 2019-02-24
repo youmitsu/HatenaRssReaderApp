@@ -29,11 +29,11 @@ import javax.inject.Inject
  */
 class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Injectable {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var binding: FragmentListBinding
     private lateinit var viewType: ViewType
     private lateinit var viewModel: MainViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     companion object {
         val VIEW_TYPE_KEY = "view_type"
@@ -57,11 +57,12 @@ class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Injectabl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
         viewModel.entries.observe(this, Observer { list ->
-            (binding.recyclerView.adapter as? TopRecyclerViewAdapter)?.itemList = list[viewType]
+            (binding.recyclerView.adapter as? TopRecyclerViewAdapter)?.itemList = list
             binding.recyclerView.adapter?.notifyDataSetChanged()
         })
+        binding.viewType = this.viewType
         binding.viewModel = this.viewModel
         swipeRefreshLayout.setOnRefreshListener(this)
         binding.recyclerView.adapter = TopRecyclerViewAdapter(requireContext()) { entry: HatebuEntry ->
