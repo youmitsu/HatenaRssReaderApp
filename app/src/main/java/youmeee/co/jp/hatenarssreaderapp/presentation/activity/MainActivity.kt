@@ -9,6 +9,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import youmeee.co.jp.clippablelayout.CircleClipEntry
+import youmeee.co.jp.clippablelayout.ClipEntry
 import youmeee.co.jp.clippablelayout.ClipExecutorFactory
 import youmeee.co.jp.clippablelayout.ClippableItem
 import youmeee.co.jp.hatenarssreaderapp.R
@@ -37,9 +38,17 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         view_pager.offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
         view_pager.adapter = viewPagerAdapter
         tab_layout.setupWithViewPager(view_pager)
-        val tab1 = tab_layout.getTabAt(0)?.view
-        val entry = CircleClipEntry(tab1 as LinearLayout, resources.getDimension(R.dimen.tab_clip_margin))
-        val item = ClippableItem(this, listOf(entry))
-        ClipExecutorFactory.create(listOf(item), window, container).execute()
+        val firstTabEntry = buildClipEntry(0)
+        val secondTabEntry = buildClipEntry(1)
+        val thirdTabEntry = buildClipEntry(2)
+
+        val item = ClippableItem(this, listOf(firstTabEntry))
+        val item2 = ClippableItem(this, listOf(secondTabEntry))
+        val item3 = ClippableItem(this, listOf(thirdTabEntry))
+        ClipExecutorFactory.create(listOf(item, item2, item3), window, container).execute()
+    }
+
+    private fun buildClipEntry(id: Int): ClipEntry {
+        return CircleClipEntry(tab_layout.getTabAt(id)?.view as LinearLayout, resources.getDimension(R.dimen.tab_clip_margin))
     }
 }
