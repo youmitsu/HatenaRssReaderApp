@@ -1,5 +1,13 @@
 <resources>
 
+    <style name="Theme.App" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorError">@color/colorAccent</item>
+    </style>
+
     <style name="AppTheme" parent="ThemeOverlay.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="android:actionBarStyle">@style/ActionBarStyle</item>
