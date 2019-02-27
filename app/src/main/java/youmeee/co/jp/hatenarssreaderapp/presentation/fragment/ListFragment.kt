@@ -62,12 +62,12 @@ class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Injectabl
             (binding.recyclerView.adapter as? TopRecyclerViewAdapter)?.itemList = list
             binding.recyclerView.adapter?.notifyDataSetChanged()
         })
-        viewModel.isLoading.observe(this, Observer {
-            binding.loading.visibility = if (it) View.VISIBLE else View.GONE
-        })
-        viewModel.isError.observe(this, Observer {
-            binding.errorBar.visibility = if (it) View.VISIBLE else View.GONE
-        })
+//        viewModel.isLoading.observe(this, Observer {
+//            binding.loading.visibility = if (it) View.VISIBLE else View.GONE
+//        })
+//        viewModel.isError.observe(this, Observer {
+//            binding.errorBar.visibility = if (it) View.VISIBLE else View.GONE
+//        })
         binding.viewType = this.viewType
         binding.viewModel = this.viewModel
         swipeRefreshLayout.setOnRefreshListener(this)

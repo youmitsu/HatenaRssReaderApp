@@ -1,5 +1,6 @@
 package youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel
 
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,21 +24,21 @@ class MainViewModel @Inject constructor(
             return mEntries
         }
     private val mEntries = MutableLiveData<MutableList<HatebuEntry>>(mutableListOf())
-    val isLoading = MutableLiveData(false)
-    val isError = MutableLiveData(false)
+    val isLoading = ObservableBoolean(false)
+    val isError = ObservableBoolean(false)
 
     fun loadRss(viewType: ViewType) {
         scope.launch {
-            isLoading.value = true
+            isLoading.set(true)
             val data = withContext(Dispatchers.Default) {
                 repository.getRss(viewType)
             }
             mEntries.value = data.value.items
-            isError.value = when (data) {
+            isError.set(when (data) {
                 is SUCCESS -> false
                 is FAILED -> true
-            }
-            isLoading.value = false
+            })
+            isLoading.set(false)
         }
     }
 }
