@@ -15,4 +15,10 @@
 
     <!-- error -->
     <string name="error_description">エラーが発生しました</string>
+
+    <!-- Tutorial -->
+    <string name="all_desc">このタブから総合カテゴリが見れます</string>
+    <string name="social_desc">このタブから世の中カテゴリが見れます</string>
+    <string name="society_desc">このタブから政治・経済カテゴリが見れます</string>
+    <string name="life_desc">このタブから暮らしカテゴリが見れます</string>
 </resources>
