@@ -13,7 +13,7 @@ import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import youmeee.co.jp.clippablelayout.CircleClipEntry
 import youmeee.co.jp.clippablelayout.ClipExecutorFactory
-import youmeee.co.jp.clippablelayout.ClippableItem
+import youmeee.co.jp.clippablelayout.ClippableLayout
 import youmeee.co.jp.clippablelayout.DescriptionView
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopViewPagerAdapter
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 buildClipItem(3, R.string.life_desc)), window, container).execute()
     }
 
-    private fun buildClipItem(id: Int, descResId: Int): ClippableItem = ClippableItem(this,
+    private fun buildClipItem(id: Int, descResId: Int) = ClippableLayout(this,
             listOf(CircleClipEntry(tab_layout.getTabAt(id)?.view as LinearLayout, resources.getDimension(R.dimen.tab_clip_margin))),
             DescriptionView(TutorialTabDescView(this, getString(descResId)), tutorialLp))
 }
