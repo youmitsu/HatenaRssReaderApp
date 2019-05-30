@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "583665423611",
+    "firebase_url": "https://hatenarssreaderapp.firebaseio.com",
+    "project_id": "hatenarssreaderapp",
+    "storage_bucket": "hatenarssreaderapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:583665423611:android:3f404a4098c392a9",
+        "android_client_info": {
+          "package_name": "youmeee.co.jp.hatenarssreaderapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "583665423611-8qi15kpjt5c1kdpt6or2q35vveoa58o8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAMnHm3Y0OJhg2dbnsdFqaftgFvxucscM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "583665423611-8qi15kpjt5c1kdpt6or2q35vveoa58o8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

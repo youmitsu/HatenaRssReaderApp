@@ -88,6 +88,9 @@ dependencies {
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.9'
     // ClippableLayout
     implementation "jp.co.youmitsu:clipper:0.2.1"
 }
+apply plugin: 'com.google.gms.google-services'
