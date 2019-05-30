@@ -1,5 +1,6 @@
 package youmeee.co.jp.hatenarssreaderapp
 
+import com.google.firebase.messaging.FirebaseMessaging
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.DaggerApplication
 import youmeee.co.jp.hatenarssreaderapp.di.DaggerAppComponent
@@ -18,5 +19,6 @@ open class App : DaggerApplication() {
         super.onCreate()
         applyAutoInjector()
         AndroidThreeTen.init(this)
+        FirebaseMessaging.getInstance().subscribeToTopic("PUSH_RC")
     }
 }
