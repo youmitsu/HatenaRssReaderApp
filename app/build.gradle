@@ -21,6 +21,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        immediately {
+            applicationIdSuffix ".immediately"
+            debuggable true
+        }
+        notImmediately {
+            applicationIdSuffix ".notimmediately"
+            debuggable true
+        }
     }
     dataBinding {
         enabled = true
