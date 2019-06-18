@@ -41,12 +41,6 @@ android {
     }
 }
 
-repositories {
-    maven {
-        url "https://youmitsu.github.io/Clipper/repository"
-    }
-}
-
 ext {
     dagger_version = '2.20'
     butterknife_version = '8.5.1'
@@ -102,7 +96,5 @@ dependencies {
     implementation "com.google.firebase:firebase-messaging:18.0.0"
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    // ClippableLayout
-    implementation "jp.co.youmitsu:clipper:0.2.1"
 }
 apply plugin: 'com.google.gms.google-services'
