@@ -1,5 +1,7 @@
 package youmeee.co.jp.hatenarssreaderapp.di
 
+import android.content.Context
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides

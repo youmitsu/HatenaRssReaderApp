@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.fragment_list.*
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
@@ -34,6 +35,8 @@ class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Injectabl
     private lateinit var viewModel: MainViewModel
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var firebaseAnalytics: FirebaseAnalytics
 
     companion object {
         val VIEW_TYPE_KEY = "view_type"
@@ -66,6 +69,12 @@ class ListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Injectabl
         binding.viewModel = this.viewModel
         swipeRefreshLayout.setOnRefreshListener(this)
         binding.recyclerView.adapter = TopRecyclerViewAdapter(requireContext()) { entry: HatebuEntry ->
+            val bundle = Bundle().also {
+                it.putString("view_type", viewType.typeName)
+                it.putString("title", entry.title)
+                it.putString("url", entry.link)
+            }
+            firebaseAnalytics.logEvent("click_item", bundle)
             val intent = Intent(context, DetailActivity::class.java)
             intent.putExtra(DetailActivity.ENTRY_KEY, entry)
             startActivity(intent)

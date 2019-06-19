@@ -3,11 +3,11 @@ package youmeee.co.jp.hatenarssreaderapp.util
 /**
  * ViewType
  */
-enum class ViewType(val value: Int) {
-    ALL(0),
-    SOCIAL(1),
-    ECONOMICS(2),
-    LIFE(3);
+enum class ViewType(val value: Int, val typeName: String) {
+    ALL(0, "all"),
+    SOCIAL(1, "social"),
+    ECONOMICS(2, "economics"),
+    LIFE(3, "life");
 
     companion object {
         fun fromValue(value: Int): ViewType {
