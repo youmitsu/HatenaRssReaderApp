@@ -40,7 +40,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     @Inject
     lateinit var firebaseAnalytics: FirebaseAnalytics
-    private val remoteConfig = FirebaseRemoteConfig.getInstance()
+    @Inject
+    lateinit var remoteConfig: FirebaseRemoteConfig
     private val sharedPreferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(this)
     }
