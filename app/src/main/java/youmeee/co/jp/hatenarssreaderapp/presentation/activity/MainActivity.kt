@@ -1,8 +1,8 @@
 package youmeee.co.jp.hatenarssreaderapp.presentation.activity
 
 import android.app.Dialog
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
@@ -42,9 +42,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var firebaseAnalytics: FirebaseAnalytics
     @Inject
     lateinit var remoteConfig: FirebaseRemoteConfig
-    private val sharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(this)
-    }
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun supportFragmentInjector() = androidInjector
 
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         view_pager.offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
         view_pager.adapter = viewPagerAdapter
         tab_layout.setupWithViewPager(view_pager)
-        tab_layout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+        tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab) {
             }
 
