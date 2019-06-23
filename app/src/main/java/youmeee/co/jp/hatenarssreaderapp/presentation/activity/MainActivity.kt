@@ -100,8 +100,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private fun fetchWelcomeMessage(isFetched: (shouldShowMessage: String, message: String) -> Unit) {
         remoteConfig.apply {
             fetchAndActivate().addOnCompleteListener {
-                isFetched(getString("welcome_title"), getString("welcome_message"))
-                sharedPreferences.edit().putBoolean("CONFIG_STALE", false).apply()
+                if (getBoolean("welcome_is_available")) {
+                    isFetched(getString("welcome_title"), getString("welcome_message"))
+                    sharedPreferences.edit().putBoolean("CONFIG_STALE", false).apply()
+                }
             }
         }
     }
