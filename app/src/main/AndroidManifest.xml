@@ -24,17 +24,17 @@
 
         <activity
             android:name=".presentation.activity.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.activity.DetailActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".presentation.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.activity.DetailActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
 
         <service
             android:name=".FCMService"
