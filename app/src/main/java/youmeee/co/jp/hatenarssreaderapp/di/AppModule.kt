@@ -1,5 +1,8 @@
 package youmeee.co.jp.hatenarssreaderapp.di
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -41,5 +44,10 @@ class AppModule {
     @Singleton
     fun provideRssApi(retrofit: Retrofit): RssApi =
             retrofit.create(RssApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(context: Context): SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(context)
 
 }

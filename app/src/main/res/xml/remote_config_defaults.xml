@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <defaultsMap>
     <entry>
-        <key>welcome_message</key>
+        <key>welcome_title</key>
         <value>Hello(Local)</value>
+    </entry>
+    <entry>
+        <key>welcome_message</key>
+        <value>Have a nice day!</value>
     </entry>
 </defaultsMap>

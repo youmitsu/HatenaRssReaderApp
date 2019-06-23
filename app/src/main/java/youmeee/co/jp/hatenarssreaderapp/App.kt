@@ -13,6 +13,7 @@ open class App : DaggerApplication() {
 
     override fun applicationInjector() = DaggerAppComponent.builder()
             .application(this)
+            .context(this)
             .build()
 
     override fun onCreate() {

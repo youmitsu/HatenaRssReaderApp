@@ -6,6 +6,9 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.firebase-perf'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -17,17 +20,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            debuggable true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        immediately {
-            applicationIdSuffix ".immediately"
-            debuggable true
-        }
-        notImmediately {
-            applicationIdSuffix ".notimmediately"
-            debuggable true
         }
     }
     dataBinding {
@@ -38,12 +36,6 @@ android {
         // Or, if you prefer, you can continue to check for errors in release builds,
         // but continue the build even when errors are found:
         abortOnError false
-    }
-}
-
-repositories {
-    maven {
-        url "https://youmitsu.github.io/Clipper/repository"
     }
 }
 
@@ -60,26 +52,30 @@ ext {
     glide_version = '4.8.0'
 }
 
+configurations {
+    all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //noinspection GradleCompatible
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
-    implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha3"
+    implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta1"
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha02'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha06'
     // Lifecycle components
-    implementation "androidx.arch.core:core-runtime:2.0.1-alpha01"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha02'
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.1.0-alpha02'
+    implementation "androidx.arch.core:core-runtime:2.1.0-beta01"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01'
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.2.0-alpha01'
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
     //ThreetenABP
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-simplexml:$retrofit_version"
@@ -98,11 +94,12 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glide_version"
     // Firebase
     implementation "com.google.firebase:firebase-core:16.0.9"
-    implementation "com.google.firebase:firebase-config:17.0.0"
-    implementation "com.google.firebase:firebase-messaging:18.0.0"
+    implementation "com.google.firebase:firebase-config:18.0.0"
+    implementation "com.google.firebase:firebase-messaging:19.0.0"
+    implementation 'com.google.firebase:firebase-inappmessaging-display:17.2.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation 'com.google.firebase:firebase-perf:18.0.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    // ClippableLayout
-    implementation "jp.co.youmitsu:clipper:0.2.1"
 }
 apply plugin: 'com.google.gms.google-services'

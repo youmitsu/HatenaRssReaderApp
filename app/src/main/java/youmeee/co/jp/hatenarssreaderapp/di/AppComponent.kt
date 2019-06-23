@@ -1,5 +1,6 @@
 package youmeee.co.jp.hatenarssreaderapp.di
 
+import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -14,7 +15,8 @@ import javax.inject.Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
     AppModule::class,
-    UiModule::class
+    UiModule::class,
+    FirebaseModule::class
 ])
 interface AppComponent : AndroidInjector<App> {
 
@@ -22,6 +24,9 @@ interface AppComponent : AndroidInjector<App> {
     interface Builder {
         @BindsInstance
         fun application(application: App): Builder
+
+        @BindsInstance
+        fun context(context: Context): Builder
 
         fun build(): AppComponent
     }
