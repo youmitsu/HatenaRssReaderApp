@@ -1,21 +1,14 @@
 package youmeee.co.jp.hatenarssreaderapp.presentation.activity
 
-import android.app.Dialog
-import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
-import youmeee.co.jp.hatenarssreaderapp.BuildConfig
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopViewPagerAdapter
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
@@ -40,10 +33,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     @Inject
     lateinit var firebaseAnalytics: FirebaseAnalytics
-    @Inject
-    lateinit var remoteConfig: FirebaseRemoteConfig
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
 
     override fun supportFragmentInjector() = androidInjector
 
@@ -68,64 +57,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 firebaseAnalytics.logEvent("click_tab", bundle)
             }
         })
-
-        initRemoteConfigEventSettings()
-
-        showWelcomeMessage()
     }
-
-    private fun initRemoteConfigEventSettings() {
-        val fetchTime = if (BuildConfig.DEBUG ||
-                sharedPreferences.getBoolean("CONFIG_STALE", false)) {
-            0L
-        } else {
-            DEFAULT_FETCH_TIME // デフォルト12時間
-        }
-        val configSettings = FirebaseRemoteConfigSettings.Builder()
-                .setMinimumFetchIntervalInSeconds(fetchTime)
-                .build()
-        remoteConfig.apply {
-            setConfigSettingsAsync(configSettings)
-            setDefaults(R.xml.remote_config_defaults)
-        }
-    }
-
-    private fun showWelcomeMessage() {
-        fetchWelcomeMessage { title, message ->
-            val fragment = WelcomeDialogFragment(title, message)
-            fragment.show(supportFragmentManager, DIALOG_TAG)
-        }
-    }
-
-    private fun fetchWelcomeMessage(isFetched: (shouldShowMessage: String, message: String) -> Unit) {
-        remoteConfig.apply {
-            fetchAndActivate().addOnCompleteListener {
-                if (getBoolean("welcome_is_available")) {
-                    isFetched(getString("welcome_title"), getString("welcome_message"))
-                    sharedPreferences.edit().putBoolean("CONFIG_STALE", false).apply()
-                }
-            }
-        }
-    }
-}
-
-class WelcomeDialogFragment(
-        private val title: String? = DEFAULT_TITLE,
-        private val message: String? = DEFAULT_MESSAGE) : DialogFragment() {
-
-    companion object {
-        const val DEFAULT_TITLE = "Hello!!"
-        const val DEFAULT_MESSAGE = "Have a nice day!"
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.apply {
-            setTitle(title)
-            setMessage(message)
-            setPositiveButton("OK") { dialog, id ->
-            }
-        }
-        return builder.create()
-    }
+//    private fun showWelcomeMessage() {
+//        fetchWelcomeMessage { title, message ->
+//            val fragment = WelcomeDialogFragment(title, message)
+//            fragment.show(supportFragmentManager, DIALOG_TAG)
+//        }
+//    }
 }
