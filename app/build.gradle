@@ -101,5 +101,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-perf:18.0.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
 }
 apply plugin: 'com.google.gms.google-services'
