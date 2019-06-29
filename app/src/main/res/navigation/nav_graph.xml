@@ -3,8 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/newListFragment">
+    app:startDestination="@id/newSplashFragment">
 
+    <fragment
+        android:id="@+id/newSplashFragment"
+        android:name="youmeee.co.jp.hatenarssreaderapp.NewSplashFragment"
+        android:label="fragment_new_splash"
+        tools:layout="@layout/fragment_new_splash" >
+        <action
+            android:id="@+id/action_newSplashFragment_to_newListFragment"
+            app:destination="@id/newListFragment"
+            app:popUpTo="@id/newListFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/newListFragment"
         android:name="youmeee.co.jp.hatenarssreaderapp.NewListFragment"
@@ -19,13 +30,4 @@
         android:name="youmeee.co.jp.hatenarssreaderapp.NewDetailFragment"
         android:label="fragment_new_detail"
         tools:layout="@layout/fragment_new_detail" />
-    <fragment
-        android:id="@+id/newSplashFragment"
-        android:name="youmeee.co.jp.hatenarssreaderapp.NewSplashFragment"
-        android:label="fragment_new_splash"
-        tools:layout="@layout/fragment_new_splash" >
-        <action
-            android:id="@+id/action_newSplashFragment_to_newListFragment"
-            app:destination="@id/newListFragment" />
-    </fragment>
 </navigation>

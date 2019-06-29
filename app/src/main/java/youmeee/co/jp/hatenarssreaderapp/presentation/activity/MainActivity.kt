@@ -38,7 +38,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_new)
+    }
+
+    private fun legacyProc() {
         viewPagerAdapter = TopViewPagerAdapter(this, supportFragmentManager)
         view_pager.offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
         view_pager.adapter = viewPagerAdapter
@@ -58,10 +61,4 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             }
         })
     }
-//    private fun showWelcomeMessage() {
-//        fetchWelcomeMessage { title, message ->
-//            val fragment = WelcomeDialogFragment(title, message)
-//            fragment.show(supportFragmentManager, DIALOG_TAG)
-//        }
-//    }
 }
