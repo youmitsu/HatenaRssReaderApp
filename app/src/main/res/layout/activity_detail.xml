@@ -26,87 +26,101 @@
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/Theme.App" />
 
-        <ImageView
-            android:id="@+id/thumbnail"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/detail_thumbnail_image"
-            app:imageUrl="@{entry.imageurl}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/list_item_side_padding"
-            android:layout_marginTop="@dimen/detail_thumbnail_margin_top"
-            android:layout_marginRight="@dimen/list_item_side_padding"
-            android:ellipsize="end"
-            android:maxLines="6"
-            android:text="@{entry.title}"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/thumbnail" />
-
-        <View
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/list_item_side_padding"
-            android:layout_marginRight="@dimen/list_item_side_padding"
-            android:background="@color/cardview_dark_background"
-            app:layout_constraintTop_toBottomOf="@id/title" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/list_item_side_padding"
-            android:layout_marginLeft="@dimen/list_item_side_padding"
-            android:layout_marginTop="@dimen/list_item_vertical_margin"
-            android:layout_marginRight="@dimen/list_item_side_padding"
-            android:text="@{entry.description}"
-            android:textSize="16sp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <TextView
-            android:id="@+id/bookmark_count"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/detail_description_top_margin"
-            android:layout_marginEnd="@dimen/list_item_side_padding"
-            android:layout_marginRight="@dimen/list_item_side_padding"
-            android:text='@{entry.bookmarkcount+"ブックマーク"}'
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/detail_description_top_margin"
-            android:layout_marginEnd="@dimen/list_item_side_padding"
-            android:layout_marginRight="@dimen/list_item_side_padding"
-            app:dateForString="@{entry.date}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bookmark_count" />
+                <ImageView
+                    android:id="@+id/thumbnail"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/detail_thumbnail_image"
+                    app:imageUrl="@{entry.imageurl}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/list_item_side_padding"
-            android:layout_marginTop="@dimen/button_bottom_margin"
-            android:layout_marginRight="@dimen/list_item_side_padding"
-            android:onClick="@{activity::onClick}"
-            android:text="@string/deital_see"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/date" />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/list_item_side_padding"
+                    android:layout_marginTop="@dimen/detail_thumbnail_margin_top"
+                    android:layout_marginRight="@dimen/list_item_side_padding"
+                    android:ellipsize="end"
+                    android:maxLines="6"
+                    android:text="@{entry.title}"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/thumbnail" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/list_item_side_padding"
+                    android:layout_marginRight="@dimen/list_item_side_padding"
+                    android:background="@color/cardview_dark_background"
+                    app:layout_constraintTop_toBottomOf="@id/title" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/list_item_side_padding"
+                    android:layout_marginLeft="@dimen/list_item_side_padding"
+                    android:layout_marginTop="@dimen/list_item_vertical_margin"
+                    android:layout_marginRight="@dimen/list_item_side_padding"
+                    android:text="@{entry.description}"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title" />
+
+                <TextView
+                    android:id="@+id/bookmark_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_description_top_margin"
+                    android:layout_marginEnd="@dimen/list_item_side_padding"
+                    android:layout_marginRight="@dimen/list_item_side_padding"
+                    android:text='@{entry.bookmarkcount+"ブックマーク"}'
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/description" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_description_top_margin"
+                    android:layout_marginEnd="@dimen/list_item_side_padding"
+                    android:layout_marginRight="@dimen/list_item_side_padding"
+                    app:dateForString="@{entry.date}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bookmark_count" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/list_item_side_padding"
+                    android:layout_marginTop="@dimen/button_bottom_margin"
+                    android:layout_marginRight="@dimen/list_item_side_padding"
+                    android:onClick="@{activity::onClick}"
+                    android:text="@string/deital_see"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/date" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
