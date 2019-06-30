@@ -20,16 +20,17 @@ class NewListFragment : Fragment(), Injectable {
 
     @Inject
     lateinit var firebaseAnalytics: FirebaseAnalytics
+    lateinit var viewPagerAdapter: TopViewPagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_new_list, container, false)
-        return inflater.inflate(R.layout.fragment_new_list, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewPagerAdapter = TopViewPagerAdapter(requireContext(), activity!!.supportFragmentManager)
+        viewPagerAdapter = TopViewPagerAdapter(requireContext(), fragmentManager!!)
         binding.viewPager.apply {
             offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
             adapter = viewPagerAdapter
