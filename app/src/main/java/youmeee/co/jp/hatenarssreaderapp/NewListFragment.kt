@@ -7,12 +7,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.analytics.FirebaseAnalytics
 import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentNewListBinding
+import youmeee.co.jp.hatenarssreaderapp.di.Injectable
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopViewPagerAdapter
+import youmeee.co.jp.hatenarssreaderapp.util.ViewType
+import javax.inject.Inject
 
-class NewListFragment : Fragment() {
+class NewListFragment : Fragment(), Injectable {
 
     private lateinit var binding: FragmentNewListBinding
+
+    @Inject
+    lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -38,8 +45,11 @@ class NewListFragment : Fragment() {
                     //no-op
                 }
 
-                override fun onTabSelected(p0: TabLayout.Tab?) {
-                    //TODO: Send Event
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    val bundle = Bundle().also {
+                        it.putString("view_type", ViewType.fromValue(tab!!.position).typeName)
+                    }
+                    firebaseAnalytics.logEvent("click_tab", bundle)
                 }
             })
         }

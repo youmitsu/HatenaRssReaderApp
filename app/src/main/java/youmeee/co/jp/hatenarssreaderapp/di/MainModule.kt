@@ -5,6 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
+import youmeee.co.jp.hatenarssreaderapp.NewListFragment
 import youmeee.co.jp.hatenarssreaderapp.presentation.fragment.ListFragment
 import youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel.MainViewModel
 
@@ -18,4 +19,7 @@ internal abstract class MainModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMainFragment(): ListFragment
+
+    @ContributesAndroidInjector
+    abstract fun constributeNewListFragment(): NewListFragment
 }
