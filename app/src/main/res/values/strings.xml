@@ -21,4 +21,7 @@
     <string name="social_desc">このタブから世の中カテゴリが見れます</string>
     <string name="society_desc">このタブから政治・経済カテゴリが見れます</string>
     <string name="life_desc">このタブから暮らしカテゴリが見れます</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

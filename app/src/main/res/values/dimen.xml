@@ -3,6 +3,7 @@
     <dimen name="detail_thumbnail_image">200dp</dimen>
     <dimen name="detail_thumbnail_margin_top">10dp</dimen>
     <dimen name="tab_clip_margin">2dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
 
     <dimen name="list_item_height">100dp</dimen>
     <dimen name="button_bottom_margin">40dp</dimen>
