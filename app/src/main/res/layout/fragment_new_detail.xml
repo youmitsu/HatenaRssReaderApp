@@ -5,6 +5,10 @@
     <data>
 
         <variable
+            name="handler"
+            type="youmeee.co.jp.hatenarssreaderapp.NewDetailFragment" />
+
+        <variable
             name="entry"
             type="youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry" />
     </data>
@@ -111,6 +115,7 @@
                     android:layout_marginTop="@dimen/button_bottom_margin"
                     android:layout_marginRight="@dimen/list_item_side_padding"
                     android:text="@string/deital_see"
+                    android:onClick="@{() -> handler.onClickMoreRead(entry.link)}"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/date" />
