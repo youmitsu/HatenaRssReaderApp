@@ -30,7 +30,7 @@ class NewListFragment : Fragment(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewPagerAdapter = TopViewPagerAdapter(requireContext(), fragmentManager!!)
+        viewPagerAdapter = TopViewPagerAdapter(requireContext(), childFragmentManager)
         binding.viewPager.apply {
             offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
             adapter = viewPagerAdapter

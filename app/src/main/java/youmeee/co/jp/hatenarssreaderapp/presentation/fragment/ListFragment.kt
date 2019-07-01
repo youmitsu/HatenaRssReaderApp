@@ -1,6 +1,5 @@
 package youmeee.co.jp.hatenarssreaderapp.presentation.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,21 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.fragment_list.*
-import youmeee.co.jp.hatenarssreaderapp.NewDetailFragmentArgs
 import youmeee.co.jp.hatenarssreaderapp.NewListFragmentDirections
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentListBinding
 import youmeee.co.jp.hatenarssreaderapp.di.Injectable
 import youmeee.co.jp.hatenarssreaderapp.net.entity.HatebuEntry
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopRecyclerViewAdapter
-import youmeee.co.jp.hatenarssreaderapp.presentation.activity.DetailActivity
 import youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel.MainViewModel
 import youmeee.co.jp.hatenarssreaderapp.util.ViewType
 import javax.inject.Inject

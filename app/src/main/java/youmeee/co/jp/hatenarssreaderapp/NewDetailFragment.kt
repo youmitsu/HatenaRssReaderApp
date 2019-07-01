@@ -25,7 +25,7 @@ class NewDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.entry = args.entry
-        (activity as AppCompatActivity).apply {
+        (requireActivity() as AppCompatActivity).apply {
             setSupportActionBar(binding.toolbar)
             supportActionBar?.title = null
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
