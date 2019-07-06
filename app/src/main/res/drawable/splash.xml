@@ -6,10 +6,4 @@
 
     <item android:drawable="@color/splash_black" />
 
-    <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@drawable/no_image" />
-    </item>
-
 </layer-list>

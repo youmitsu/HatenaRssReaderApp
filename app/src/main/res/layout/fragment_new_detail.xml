@@ -6,7 +6,7 @@
 
         <variable
             name="handler"
-            type="youmeee.co.jp.hatenarssreaderapp.NewDetailFragment" />
+            type="youmeee.co.jp.hatenarssreaderapp.presentation.fragment.NewDetailFragment" />
 
         <variable
             name="entry"

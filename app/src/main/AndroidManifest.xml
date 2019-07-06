@@ -32,11 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.activity.DetailActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".presentation.activity.SplashActivity" />
-
         <service
             android:name=".FCMService"
             android:exported="false">

@@ -6,7 +6,7 @@
     app:startDestination="@id/newListFragment">
     <fragment
         android:id="@+id/newListFragment"
-        android:name="youmeee.co.jp.hatenarssreaderapp.NewListFragment"
+        android:name="youmeee.co.jp.hatenarssreaderapp.presentation.fragment.NewListFragment"
         android:label="fragment_new_list"
         tools:layout="@layout/fragment_new_list">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/newDetailFragment"
-        android:name="youmeee.co.jp.hatenarssreaderapp.NewDetailFragment"
+        android:name="youmeee.co.jp.hatenarssreaderapp.presentation.fragment.NewDetailFragment"
         android:label="fragment_new_detail"
         tools:layout="@layout/fragment_new_detail">
         <argument
