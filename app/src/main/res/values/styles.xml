@@ -10,7 +10,7 @@
     </style>
 
     <style name="SplashTheme" parent="Theme.App">
-        <item name="android:windowBackground">@color/gray_bbbbbb</item>
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
     <style name="ActionBarStyle" parent="android:Widget.Holo.ActionBar.Solid">
