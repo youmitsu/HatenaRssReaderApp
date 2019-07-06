@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:opacity="opaque">
 
-    <item android:drawable="@color/splash_black" />
+    <item android:drawable="@color/white" />
+
+    <item
+        android:drawable="@drawable/logo_transparent"
+        android:gravity="center" />
 
 </layer-list>
