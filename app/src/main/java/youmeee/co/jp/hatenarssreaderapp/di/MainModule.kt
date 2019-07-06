@@ -5,7 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
-import youmeee.co.jp.hatenarssreaderapp.NewListFragment
+import youmeee.co.jp.hatenarssreaderapp.presentation.fragment.NewListFragment
 import youmeee.co.jp.hatenarssreaderapp.presentation.fragment.ListFragment
 import youmeee.co.jp.hatenarssreaderapp.presentation.viewmodel.MainViewModel
 

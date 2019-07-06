@@ -1,4 +1,4 @@
-package youmeee.co.jp.hatenarssreaderapp
+package youmeee.co.jp.hatenarssreaderapp.presentation.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.analytics.FirebaseAnalytics
+import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentNewListBinding
 import youmeee.co.jp.hatenarssreaderapp.di.Injectable
 import youmeee.co.jp.hatenarssreaderapp.presentation.TopViewPagerAdapter
@@ -58,9 +59,5 @@ class NewListFragment : Fragment(), Injectable {
 
     companion object {
         private const val OFF_SCREEN_PAGE_LIMIT = 4
-
-        private const val DIALOG_TAG = "default"
-
-        private const val DEFAULT_FETCH_TIME = 43200L
     }
 }

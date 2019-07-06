@@ -1,4 +1,4 @@
-package youmeee.co.jp.hatenarssreaderapp
+package youmeee.co.jp.hatenarssreaderapp.presentation.fragment
 
 import android.content.Intent
 import android.net.Uri
@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentNewDetailBinding
 
 class NewDetailFragment : Fragment() {

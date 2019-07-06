@@ -8,16 +8,8 @@ import dagger.android.support.HasSupportFragmentInjector
 import youmeee.co.jp.hatenarssreaderapp.R
 import javax.inject.Inject
 
+
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
-
-    companion object {
-        private const val OFF_SCREEN_PAGE_LIMIT = 4
-
-        private const val DIALOG_TAG = "default"
-
-        private const val DEFAULT_FETCH_TIME = 43200L
-
-    }
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Fragment>
@@ -26,6 +18,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        showSplash()
         setContentView(R.layout.activity_main_new)
+    }
+
+    private fun showSplash() {
+        try {
+            Thread.sleep(500)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        setTheme(R.style.Theme_App)
     }
 }
