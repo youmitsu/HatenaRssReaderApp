@@ -1,9 +1,7 @@
 package youmeee.co.jp.hatenarssreaderapp.presentation.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
@@ -22,6 +20,11 @@ class NewListFragment : Fragment(), Injectable {
     @Inject
     lateinit var firebaseAnalytics: FirebaseAnalytics
     lateinit var viewPagerAdapter: TopViewPagerAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -55,6 +58,20 @@ class NewListFragment : Fragment(), Injectable {
                 }
             })
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.top_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_settings -> {
+                return false
+            }
+        }
+        return true
     }
 
     companion object {
