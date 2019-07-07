@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import youmeee.co.jp.hatenarssreaderapp.R
 import youmeee.co.jp.hatenarssreaderapp.databinding.FragmentNewDetailBinding
@@ -22,6 +21,7 @@ class NewDetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_new_detail, container, false)
+        setupNavigationBar(null, true)
         return binding.root
     }
 
@@ -29,13 +29,17 @@ class NewDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.entry = args.entry
         binding.handler = this
+    }
+
+    override fun onDetach() {
+        setupNavigationBar(resources.getString(R.string.app_name), false)
+        super.onDetach()
+    }
+
+    private fun setupNavigationBar(title: String?, isShowUp: Boolean) {
         (requireActivity() as AppCompatActivity).apply {
-            setSupportActionBar(binding.toolbar)
-            supportActionBar?.title = null
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+            supportActionBar?.title = title
+            supportActionBar?.setDisplayHomeAsUpEnabled(isShowUp)
         }
     }
 

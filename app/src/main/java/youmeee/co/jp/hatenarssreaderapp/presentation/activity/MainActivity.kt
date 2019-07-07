@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         showSplash()
         setContentView(R.layout.activity_main_new)
+        setSupportActionBar(findViewById(R.id.tool_bar))
     }
 
     private fun showSplash() {
