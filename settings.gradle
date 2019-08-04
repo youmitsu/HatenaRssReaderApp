@@ -1,1 +1,1 @@
-include ':app', ':legacy'
+include ':app', ':legacy', ':core'

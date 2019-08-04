@@ -45,6 +45,8 @@ configurations {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':core')
+    implementation project(':legacy')
 
     // Kotlin
     implementation Deps.Kotlin.stdLib
@@ -54,38 +56,30 @@ dependencies {
     implementation Deps.AndroidX.constraintlayout
     implementation Deps.AndroidX.legacySupport
 
-    implementation Deps.AndroidX.design
-    implementation Deps.AndroidX.cardView
-    implementation Deps.AndroidX.recyclerView
-    // Lifecycle components
-    implementation Deps.AndroidX.coreArch
-    implementation Deps.AndroidX.LifeCycle.extension
-    kapt Deps.AndroidX.LifeCycle.compiler
     // Navigation
     implementation Deps.AndroidX.Navigation.fragmentKtx
     implementation Deps.AndroidX.Navigation.uiKtx
-    // Coroutines
-    implementation Deps.Kotlin.Coroutines.core
-    implementation Deps.Kotlin.Coroutines.android
+
     // ThreetenABP
     implementation Deps.ThreetenAbp.threetenabp
+
     // Retrofit
     implementation Deps.Retrofit.retrofit
     implementation Deps.Retrofit.xmlConverter
     implementation Deps.Retrofit.coroutineAdapter
     implementation Deps.Retrofit.rxAdapter
+
     // OkHttp
     implementation Deps.OkHttp.okhttp
     implementation Deps.OkHttp.logging
+
     // Dagger
     implementation Deps.Dagger.dagger
     implementation Deps.Dagger.android
     implementation Deps.Dagger.androidSupport
     kapt Deps.Dagger.compiler
     kapt Deps.Dagger.androidProcessor
-    // Glide
-    implementation Deps.Glide.glide
-    kapt Deps.Glide.compiler
+
     // Firebase
     implementation Deps.Firebase.core
     implementation Deps.Firebase.remoteConfig
@@ -93,8 +87,10 @@ dependencies {
     implementation Deps.Firebase.inAppMessaging
     implementation Deps.Firebase.crashlytics
     implementation Deps.Firebase.perf
+
     // Test
     testImplementation Deps.Test.junit
+    
     // AndroidTest
     androidTestImplementation Deps.Test.testRunner
     androidTestImplementation Deps.Test.Espresso.core

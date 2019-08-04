@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.App" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="colorError">@color/colorAccent</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.App">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
+    <style name="ActionBarStyle" parent="android:Widget.Holo.ActionBar.Solid">
+        <item name="android:backgroundStacked">@android:color/white</item>
+    </style>
+
+    <style name="ActionBarTitleStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ActionBarSubitleStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
+        <item name="android:typeface">monospace</item>
+    </style>
+
+</resources>

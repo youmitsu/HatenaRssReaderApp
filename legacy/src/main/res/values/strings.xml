@@ -1,3 +1,30 @@
 <resources>
-    <string name="app_name">legacy</string>
+    <string name="app_name">はてなRSSりーだー</string>
+    <string name="base_url">http://b.hatena.ne.jp/</string>
+
+    <!--menu-->
+    <string name="menu_title_setting">設定</string>
+
+    <!--category-->
+    <string name="category_all">総合</string>
+    <string name="category_social">世の中</string>
+    <string name="category_economics">政治と経済</string>
+    <string name="category_life">暮らし</string>
+
+    <!--detail-->
+    <string name="deital_see">続きを読む</string>
+    <string name="detail_date_format_pattern">yyyy年MM月dd日 HH時mm分</string>
+
+    <!-- error -->
+    <string name="error_description">エラーが発生しました</string>
+
+    <!-- Tutorial -->
+    <string name="all_desc">このタブから総合カテゴリが見れます</string>
+    <string name="social_desc">このタブから世の中カテゴリが見れます</string>
+    <string name="society_desc">このタブから政治・経済カテゴリが見れます</string>
+    <string name="life_desc">このタブから暮らしカテゴリが見れます</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

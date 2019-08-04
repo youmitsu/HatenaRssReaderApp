@@ -23,7 +23,7 @@
             android:resource="@color/colorAccent" />
 
         <activity
-            android:name=".presentation.activity.MainActivity"
+            android:name=".legacy.ui.activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>

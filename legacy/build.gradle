@@ -21,6 +21,7 @@ android {
 }
 
 dependencies {
+    implementation project(':core')
     // Kotlin
     implementation Deps.Kotlin.stdLib
 
@@ -65,6 +66,7 @@ dependencies {
     implementation Deps.Firebase.core
     implementation Deps.Firebase.remoteConfig
     implementation Deps.Firebase.messaging
+    implementation Deps.Firebase.perf
     // Test
     testImplementation Deps.Test.junit
     // AndroidTest

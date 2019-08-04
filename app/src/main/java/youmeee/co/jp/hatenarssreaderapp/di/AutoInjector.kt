@@ -9,8 +9,7 @@ import androidx.fragment.app.FragmentManager
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
-
-interface Injectable
+import youmeee.co.jp.hatenarssreaderapp.core.Injectable
 
 fun Application.applyAutoInjector() = registerActivityLifecycleCallbacks(
         object : Application.ActivityLifecycleCallbacks {

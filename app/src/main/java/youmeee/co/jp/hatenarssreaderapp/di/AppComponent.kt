@@ -6,6 +6,9 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import youmeee.co.jp.hatenarssreaderapp.App
+import youmeee.co.jp.hatenarssreaderapp.legacy.di.LegacyAppModule
+import youmeee.co.jp.hatenarssreaderapp.legacy.di.MainModule
+import youmeee.co.jp.hatenarssreaderapp.legacy.di.UiModule
 import javax.inject.Singleton
 
 /**
@@ -14,8 +17,9 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
-    AppModule::class,
+    LegacyAppModule::class,
     UiModule::class,
+    MainModule::class,
     FirebaseModule::class
 ])
 interface AppComponent : AndroidInjector<App> {
