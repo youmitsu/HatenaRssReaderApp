@@ -1,0 +1,73 @@
+import dependencies.Deps
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    dataBinding {
+        enabled = true
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+}
+
+dependencies {
+    // Kotlin
+    implementation Deps.Kotlin.stdLib
+
+    // AndroidX
+    implementation Deps.AndroidX.appCompat
+    implementation Deps.AndroidX.constraintlayout
+    implementation Deps.AndroidX.legacySupport
+
+    implementation Deps.AndroidX.design
+    implementation Deps.AndroidX.cardView
+    implementation Deps.AndroidX.recyclerView
+    // Lifecycle components
+    implementation Deps.AndroidX.coreArch
+    implementation Deps.AndroidX.LifeCycle.extension
+    kapt Deps.AndroidX.LifeCycle.compiler
+    // Navigation
+    implementation Deps.AndroidX.Navigation.fragmentKtx
+    implementation Deps.AndroidX.Navigation.uiKtx
+    // Coroutines
+    implementation Deps.Kotlin.Coroutines.core
+    implementation Deps.Kotlin.Coroutines.android
+    // ThreetenABP
+    implementation Deps.ThreetenAbp.threetenabp
+    // Retrofit
+    implementation Deps.Retrofit.retrofit
+    implementation Deps.Retrofit.xmlConverter
+    implementation Deps.Retrofit.coroutineAdapter
+    implementation Deps.Retrofit.rxAdapter
+    // OkHttp
+    implementation Deps.OkHttp.okhttp
+    implementation Deps.OkHttp.logging
+    // Dagger
+    implementation Deps.Dagger.dagger
+    implementation Deps.Dagger.android
+    implementation Deps.Dagger.androidSupport
+    kapt Deps.Dagger.compiler
+    kapt Deps.Dagger.androidProcessor
+    // Glide
+    implementation Deps.Glide.glide
+    kapt Deps.Glide.compiler
+    // Firebase
+    implementation Deps.Firebase.core
+    implementation Deps.Firebase.remoteConfig
+    implementation Deps.Firebase.messaging
+    // Test
+    testImplementation Deps.Test.junit
+    // AndroidTest
+    androidTestImplementation Deps.Test.testRunner
+    androidTestImplementation Deps.Test.Espresso.core
+}
